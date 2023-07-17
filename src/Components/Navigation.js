@@ -64,7 +64,7 @@ function Navigation() {
                   <a href="/classify">Disease Classification</a>
                 </li>
                 <li>
-                  <a href="/">About us</a>
+                  <a href="/about">About us</a>
                 </li>
 
                 <a
@@ -107,7 +107,7 @@ function Navigation() {
             <a href="/classify">Disease Classification</a>
           </li>
           <li>
-            <a href="/">About us</a>
+            <a href="/about">About us</a>
           </li>
         </ul>
       </div>

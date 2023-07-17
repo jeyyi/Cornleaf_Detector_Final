@@ -2,7 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import Home from "./Home";
+import NotFound from "./NotFound";
 import styles from "./index.css";
+import About from "./About";
+import Example from './Example'
 import Navigation from "./Components/Navigation";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -15,7 +18,10 @@ root.render(
         <Route path="/" element={<Navigation/>}>
           <Route index element={<Home/>}/>
           <Route path = "/classify" element={<App/>}/>
+          <Route path="/about" element={<About/>}/>
+          <Route path="/*" element={<NotFound/>}/>
         </Route>
+        <Route path="/example" element={<Example/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

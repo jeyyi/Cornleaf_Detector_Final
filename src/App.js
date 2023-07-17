@@ -8,6 +8,7 @@ function App() {
   const [prediction, setPrediction] = useState(null);
   const [model, setModel] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [modelName, setModelName] = useState("Inception")
 
   useEffect(() => {
     async function loadModel() {
@@ -24,8 +25,15 @@ function App() {
     }
     loadModel();
   }, []);
+  
+  const changeModel = () =>{
+    const selectbox = document.getElementById('select_model');
+    const selectedValue = selectbox.options[selectbox.selectedIndex].value;
+    setModelName(selectedValue);
+    window.my_modal_4.showModal();
+  }
 
-  async function loadXception() {
+  /* async function loadXception() {
     try {
       setModelLoaded(false);
       const xception = await tf.loadLayersModel(
@@ -37,7 +45,7 @@ function App() {
     } catch (error) {
       console.error("Faled to load model: ", error);
     }
-  }
+  } */
 
   const handleImageUpload = async (event) => {
     const imageFile = event.target.files[0];
@@ -46,6 +54,7 @@ function App() {
       const reader = new FileReader();
 
       reader.onloadend = () => {
+        window.my_modal_5.showModal();
         imageElement.src = reader.result;
         imageElement.onload = async () => {
           const tfImage = tf.browser.fromPixels(imageElement).toFloat();
@@ -56,6 +65,8 @@ function App() {
           const predictedClassIndex = tf.argMax(prediction).dataSync()[0];
           const result = labels[predictedClassIndex];
           setPrediction(result);
+          const closebutton = document.getElementById("closeButton");
+          closebutton.click()
         };
       };
 
@@ -70,7 +81,7 @@ function App() {
     return (
       <div className="flex flex-col items-center h-screen bg-gradient-to-bl from-lime-100 to-amber-200 justify-center">
         <p className="text-2xl font-thin">
-          Loading model<span className="loading loading-ring loading-md"></span>
+        <span className="loading loading-ring loading-md"></span>Loading models
         </p>
         <p className="text-lg font-light">
           Progress:{" "}
@@ -89,14 +100,39 @@ function App() {
 
   return (
     <div className="flex flex-col items-center h-screen bg-gradient-to-bl from-lime-100 to-amber-200 justify-center">
+      {/* Predicting modal */}
+      <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+        <form method="dialog" className="modal-box bg-primary">
+          <h3 className="font-bold text-lg">Please wait</h3>
+          <p className="py-4 items-center">
+            Predicting disease...
+            <span className="loading loading-spinner loading-lg"></span>
+          </p>
+          <div className="modal-action hidden">
+            <button className="btn" id="closeButton">Close</button>
+          </div>
+        </form>
+      </dialog>
+      {/* Switch Model Modal */}
+      <dialog id="my_modal_4" className="modal modal-bottom sm:modal-middle">
+        <form method="dialog" className="modal-box bg-primary">
+          <h3 className="font-bold text-lg">You are currently using</h3>
+          <p className="py-4 items-center">
+            {modelName}
+          </p>
+          <div className="modal-action">
+            <button className="btn bg-red-400 text-white border-none" id="closeButton">Close</button>
+          </div>
+        </form>
+      </dialog>
       <h1 className="text-3xl font-semibold">Classify Disease</h1>
       <div className="flex flex-col lg:flex-row gap-3 mt-5 items-center">
         <h3>Select Model:</h3>
-        <select className="select select-bordered select-primary bg-primary">
+        <select className="select select-bordered select-primary bg-primary" id="select_model" onChange={changeModel}>
           <option disabled>Pick one</option>
-          <option>Inception</option>
-          <option>Xception</option>
-          <option>InceptionResnet</option>
+          <option value="Inception">Inception</option>
+          <option value="Xception">Xception</option>
+          <option value="InceptionResnet">InceptionResnet</option>
         </select>
       </div>
       <div className="w-64 h-64 lg:w-96 lg:h-96 border-green-800 border mt-5">
@@ -110,7 +146,8 @@ function App() {
       </div>
       {prediction && (
         <p className="text-xl mt-5">
-          Prediction:<span className="font-bold text-2xl">{" "+ prediction}</span>
+          Prediction:
+          <span className="font-bold text-2xl">{" " + prediction}</span>
         </p>
       )}
       <label htmlFor="file" className="btn btn-primary btn-wide mt-10">

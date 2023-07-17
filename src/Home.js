@@ -2,6 +2,8 @@ import React from "react";
 import BG from "./Assets/background.png";
 import Healthy from "./Assets/healthy.jpg";
 import Rust from "./Assets/rust.JPG";
+import GrayLeaf from "./Assets/grayleaf.JPG"
+import Blight from "./Assets/Blight.jpg"
 
 function Home() {
   return (
@@ -14,7 +16,10 @@ function Home() {
           <h3 className="text-4xl lg:text-6xl font-semibold">
             Protect Your Corn Crop from Devastating Diseases
           </h3>
-          <a className="btn btn-primary h-20 w-1/2 text-lg my-10 rounded-full text-white mx-auto lg:mx-0" href="/classify">
+          <a
+            className="btn btn-primary h-20 w-1/2 text-lg my-10 rounded-full text-white mx-auto lg:mx-0"
+            href="/classify"
+          >
             Classify
             <span>
               <svg
@@ -45,7 +50,7 @@ function Home() {
       <div className="flex flex-col min-h-screen bg-amber-200 px-5 lg:px-64 py-20 items-center">
         <h1 className="text-3xl font-semibold">Corn Diseases</h1>
         <div className="min-h-screen w-full mt-10">
-            {/* Start of healthy div */}
+          {/* Start of healthy div */}
           <div className="h-fit lg:h-1/2 w-full flex flex-col lg:flex-row">
             {/* Div for text of healthy */}
             <div className="w-full lg:w-1/2 h-full">
@@ -87,7 +92,7 @@ function Home() {
             </div>
           </div>
           {/* Start of Rust div */}
-          <div className="h-screen lg:h-1/2 w-full flex flex-col lg:flex-row mt-5 lg:mt-0">
+          <div className="h-fit lg:h-1/2 w-full flex flex-col lg:flex-row mt-5 lg:mt-0">
             {/* Div for rust image */}
             <div className="w-full lg:w-1/2 h-full px-20 py-10 hidden lg:flex">
               <img
@@ -96,7 +101,7 @@ function Home() {
                 alt="Background for cornleaf"
               />
             </div>
-             {/* Div for rust text */}
+            {/* Div for rust text */}
             <div className="w-full lg:w-1/2 h-full lg:px-20 lg:py-10">
               <h1 className="text-2xl font-semibold">Common Rust</h1>
               <img
@@ -114,6 +119,76 @@ function Home() {
                 losses. Fungicides and resistant corn varieties are used for
                 management. Early detection and prompt action are key to
                 minimizing its impact.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="min-h-screen w-full mt-10">
+          {/* Start of Blight div */}
+          <div className="h-fit lg:h-1/2 w-full flex flex-col lg:flex-row">
+            {/* Div for text of Blight */}
+            <div className="w-full lg:w-1/2 h-full">
+              <h1 className="text-2xl font-semibold">Blight</h1>
+              <img
+                className="w-1/2 object-contain rounded-lg mx-auto visible lg:hidden my-5"
+                src={Blight}
+                alt="Background for cornleaf"
+              />
+              <p className="text-justify mt-2">
+                Corn leaf <span className="font-bold">Blight</span> refers to
+                fungal or bacterial diseases that damage corn plants, causing
+                lesions and reducing yield. Types include northern corn leaf
+                blight (NCLB), southern corn leaf blight (SCLB), and gray leaf
+                spot (GLS). Symptoms vary but commonly manifest as irregular
+                spots on leaves. Untreated blight leads to defoliation and
+                weakened plant defenses. Farmers combat it through crop
+                rotation, using resistant/tolerant varieties, and applying
+                fungicides. Identifying and managing blight promptly is
+                essential to minimize its impact. By understanding blight types,
+                symptoms, and implementing appropriate strategies, farmers can
+                protect their corn crops and mitigate yield losses caused by
+                this destructive disease.
+              </p>
+            </div>
+            {/* Div for photo for Blight */}
+            <div className="w-1/2 h-full px-20 py-10 hidden lg:flex">
+              <img
+                className="w-full h-full object-cover rounded-lg"
+                src={Blight}
+                alt="Background for cornleaf"
+              />
+            </div>
+          </div>
+          {/* Start of Gray Leaf Spot div */}
+          <div className="h-fit lg:h-1/2 w-full flex flex-col lg:flex-row mt-5 lg:mt-0">
+            {/* Div for Gray Leaf Spot image */}
+            <div className="w-full lg:w-1/2 h-full px-20 py-10 hidden lg:flex">
+              <img
+                className="w-full h-full object-cover rounded-lg"
+                src={GrayLeaf}
+                alt="Background for cornleaf"
+              />
+            </div>
+            {/* Div for Gray Leaf Spot text */}
+            <div className="w-full lg:w-1/2 h-full lg:px-20 lg:py-10">
+              <h1 className="text-2xl font-semibold">Gray Leaf Spot</h1>
+              <img
+                className="w-1/2 object-contain rounded-lg mx-auto visible lg:hidden my-5"
+                src={GrayLeaf}
+                alt="Background for cornleaf"
+              />
+              <p className="text-justify mt-2">
+                <span className="font-bold">Gray leaf spot</span> is a fungal disease that affects
+                corn plants. It is caused by the pathogen Cercospora
+                zeae-maydis. Gray leaf spot is characterized by the presence of
+                small, rectangular, grayish lesions on the leaves, which later
+                develop into long, narrow tan or brown streaks. The disease
+                primarily affects the lower leaves and can spread rapidly under
+                warm, humid conditions. If left unmanaged, gray leaf spot can
+                lead to defoliation, reduced photosynthesis, and decreased
+                yield. Farmers manage gray leaf spot through cultural practices,
+                such as crop rotation, and may also employ fungicides to control
+                its spread and minimize crop losses.
               </p>
             </div>
           </div>
