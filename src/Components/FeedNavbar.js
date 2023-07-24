@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../Assets/logo_white.png";
 function FeedNavbar() {
   return (
-    <div className="border-b-2 bg-lime-700 border-yellow-100 flex flex-row w-full px-10 py-4 sticky top-0">
+    <div className="border-b-2 bg-lime-700 flex flex-row w-full px-10 py-4 sticky top-0 z-10">
       <div className="justify-between w-full flex flex-row">
         <img className="w-14" src={Logo} alt="Logo" />
         <div className="flex gap-3">

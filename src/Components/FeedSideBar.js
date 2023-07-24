@@ -74,6 +74,47 @@ function FeedSideBar() {
           </div>
         </div>
         <div className="divider" />
+        <h3 className="px-5 pb-5 text-lg font-bold text-gray-400">
+          CORNLEAF DISEASE {<br />}AILMENTS
+        </h3>
+        {/* Avatar of disease */}
+        {/* Blight */}
+        <div className="flex w-full px-5 items-center gap-4 cursor-pointer hover:bg-lime-100 transition-colors py-1">
+          <div className="avatar">
+            <div className="w-10 h-10 rounded-full cursor-pointer">
+              <img
+                src="https://cropprotectionnetwork.org/image?s=%2Fimg%2Fhttp%2Fgeneral%2FNLB-Daren-Mueller-02.jpg%2Fb66174470dfc96d91292b8c2eb5f2619.jpg&h=0&w=316&fit=contain"
+                alt="Farmer profile"
+              />
+            </div>
+          </div>
+          <h3 className="text-gray-400">Blight</h3>
+        </div>
+        {/* Rust */}
+        <div className="flex w-full px-5 items-center gap-4 cursor-pointer hover:bg-lime-100 transition-colors py-1">
+          <div className="avatar">
+            <div className="w-10 h-10 rounded-full cursor-pointer">
+              <img
+                src="https://cropprotectionnetwork.org/image?s=%2Fimg%2Fhttp%2Fgeneral%2FCommon-rust-Daren-Mueller-20-1643298874.jpg%2F447b0d5918efb30f1966764b3542da65.jpg&h=256&w=316&fit=cover"
+                alt="Rust"
+              />
+            </div>
+          </div>
+          <h3 className="text-gray-400">Common Rust</h3>
+        </div>
+        {/* Gray Leaf Spot */}
+        <div className="flex w-full px-5 items-center gap-4 cursor-pointer hover:bg-lime-100 transition-colors py-1">
+          <div className="avatar">
+            <div className="w-10 h-10 rounded-full cursor-pointer">
+              <img
+                src="https://cropprotectionnetwork.org/image?s=%2Fimg%2Fhttp%2Fgeneral%2FGray-leaf-spot-Adam-Sisson-56.jpg%2F32dda7f013d6333d2d7651dea5ffbe6a.jpg&h=0&w=316&fit=contain"
+                alt="GLS"
+              />
+            </div>
+          </div>
+          <h3 className="text-gray-400">Gray Leaf Spot</h3>
+        </div>
+        <div className="divider" />
         <h5 className="pb-5 px-5 font-light text-sm text-gray-400 cursor-pointer">
           Help
         </h5>
