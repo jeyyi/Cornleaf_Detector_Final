@@ -10,7 +10,7 @@ function FeedSideBar() {
         {/* Menu */}
         <div className="flex flex-col">
           {/* Home */}
-          <div className="w-full h-12 flex px-10 items-center gap-5">
+          <div className="w-full h-12 flex px-10 items-center gap-5 hover:bg-lime-100 cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -40,7 +40,7 @@ function FeedSideBar() {
             <h3 className="text-gray-600 font-semibold">Feed</h3>
           </div>
           {/* Disease Classification */}
-          <div className="w-full h-12 flex px-10 items-center gap-5">
+          <div className="w-full h-12 flex px-10 items-center gap-5 hover:bg-lime-100 cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -56,7 +56,7 @@ function FeedSideBar() {
             <h3 className="text-gray-400 font-semibold">Classify Disease</h3>
           </div>
           {/* About Us */}
-          <div className="w-full h-12 flex px-10 items-center gap-5">
+          <div className="w-full h-12 flex px-10 items-center gap-5 hover:bg-lime-100 cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

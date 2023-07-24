@@ -1,7 +1,13 @@
-import React from "react";
+import {React, useEffect} from "react";
 import Logo from "./Assets/Logo.png";
 
 function Login() {
+  // Set the new title when the component mounts
+  useEffect(() => {
+    document.title = "Login-Cornleaf Disease Classifier"; 
+
+  }, []); 
+
   return (
     <>
       <div className="bg-gradient-to-br from-lime-100 to-amber-200 h-screen flex items-center justify-center">

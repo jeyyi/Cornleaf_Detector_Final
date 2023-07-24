@@ -21,7 +21,7 @@ function FeedNavbar() {
           Search...
         </div>
         <div className="flex gap-3">
-          <div className="w-10 h-10 rounded-full text-base-100 flex items-center hover:bg-white hover:text-black transition-colors cursor-pointer">
+          <div className="w-10 h-10 rounded-full bg-lime-700 text-base-100 flex items-center hover:bg-white hover:text-black transition-colors cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
