@@ -5,8 +5,8 @@ import Home from "./Home";
 import NotFound from "./NotFound";
 import styles from "./index.css";
 import About from "./About";
-import Example from './Example'
 import Navigation from "./Components/Navigation";
+import Login from "./Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -21,7 +21,7 @@ root.render(
           <Route path="/about" element={<About/>}/>
           <Route path="/*" element={<NotFound/>}/>
         </Route>
-        <Route path="/example" element={<Example/>}/>
+        <Route path="/login" element={<Login/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
