@@ -2,11 +2,26 @@ import React from "react";
 import Logo from "../Assets/logo_white.png";
 function FeedNavbar() {
   return (
-    <div className="border-b-2 bg-lime-700 flex flex-row w-full px-10 py-4 sticky top-0 z-10">
+    <div className="border-b-2 bg-lime-600 flex flex-row w-full px-10 py-4 sticky top-0 z-10">
       <div className="justify-between w-full flex flex-row">
-        <img className="w-14" src={Logo} alt="Logo" />
+        <img className="h-10" src={Logo} alt="Logo" />
+        <div className="bg-lime-700 w-96 rounded-md cursor-pointer items-center px-5 text-gray-300 text-sm font-light hidden lg:flex">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-4 h-4"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10.5 3.75a6.75 6.75 0 100 13.5 6.75 6.75 0 000-13.5zM2.25 10.5a8.25 8.25 0 1114.59 5.28l4.69 4.69a.75.75 0 11-1.06 1.06l-4.69-4.69A8.25 8.25 0 012.25 10.5z"
+              clipRule="evenodd"
+            />
+          </svg>
+          Search...
+        </div>
         <div className="flex gap-3">
-          <div className="w-12 h-12 rounded-full text-base-100 flex items-center hover:bg-white hover:text-black transition-colors cursor-pointer">
+          <div className="w-10 h-10 rounded-full text-base-100 flex items-center hover:bg-white hover:text-black transition-colors cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -21,7 +36,7 @@ function FeedNavbar() {
             </svg>
           </div>
           <div className="avatar dropdown dropdown-left">
-            <div className="w-11 h-11 rounded-full">
+            <div className="w-10 h-10 rounded-full">
               <label tabIndex={0} className="cursor-pointer">
                 <img
                   src="https://media.licdn.com/dms/image/C4E12AQGJMHJYg2NzWg/article-cover_image-shrink_720_1280/0/1546512971231?e=2147483647&v=beta&t=8JEuNbLs3TuGKrF5xGCCaAb5ZbXYuLBdel0CNCTlBX4"
