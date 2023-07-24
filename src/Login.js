@@ -1,10 +1,41 @@
-import {React, useEffect} from "react";
+import React,{ useEffect, useState} from "react";
 import Logo from "./Assets/Logo.png";
+import { Navigate } from "react-router-dom";
+import axios from "axios";
 
 function Login() {
   // Set the new title when the component mounts
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleLogin = async (e) => {
+    console.log(e)
+    e.preventDefault();
+    try {
+      const payload = {
+        email, password
+      }
+
+      const response = await axios.post(
+        'https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/auth/jwt/create/',
+        payload
+      )
+      if (response.status === 200) {
+        console.log(response.data['refresh'])
+        if (typeof window !== 'undefined') {
+        localStorage.setItem('authToken', response.data['refresh']);
+        Navigate.push('/');
+        }
+      } else {
+        alert('Invalid credentials');
+      }
+    } catch (error) {
+      console.error('Login failed:', error);
+    }
+  }
+  
   useEffect(() => {
     document.title = "Login-Cornleaf Disease Classifier"; 
+    
 
   }, []); 
 
@@ -17,7 +48,7 @@ function Login() {
           <p className="font-light text-gray-700 text-sm pt-2">
             Welcome back, login to your account
           </p>
-          <form className="pt-16 flex flex-col gap-5">
+          <form onSubmit={handleLogin} className="pt-16 flex flex-col gap-5">
             <input
               type="text"
               placeholder="Enter Username"

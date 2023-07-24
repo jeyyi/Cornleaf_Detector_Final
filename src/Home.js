@@ -4,10 +4,12 @@ import Healthy from "./Assets/healthy.jpg";
 import Rust from "./Assets/rust.JPG";
 import GrayLeaf from "./Assets/grayleaf.JPG"
 import Blight from "./Assets/Blight.jpg"
+import Navigation from "./Components/Navigation";
 
 function Home() {
   return (
     <>
+    <Navigation/>
       <div className="px-5 lg:px-64 bg-gradient-to-br from-lime-100 to-amber-200 h-screen flex flex-col lg:flex-row py-10 justify-center">
         <div className="flex flex-col gap-2 w-full lg:w-1/2 text-center lg:text-left justify-center">
           <h3 className="text-2xl lg:text-3xl font-semibold">
