@@ -6,6 +6,7 @@ import NotFound from "./NotFound";
 import styles from "./index.css";
 import About from "./About";
 import Navigation from "./Components/Navigation";
+import Feed from "./Feed";
 import Login from "./Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -22,6 +23,7 @@ root.render(
           <Route path="/*" element={<NotFound/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/feed" element={<Feed/>}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
