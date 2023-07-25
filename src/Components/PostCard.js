@@ -27,7 +27,7 @@ function PostCard() {
           </div>
         </div>
         <div className="flex items-center justify-center">
-            {/* Three dots */}
+          {/* Three dots */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -58,8 +58,34 @@ function PostCard() {
           className="w-full h-full object-cover"
         />
       </div>
+      <p className="pt-5 px-5 lg:px-10 text-gray-400 text-sm font-light">
+        1 comment
+      </p>
       <div className="divider" />
-      <div className="px-5 lg:px-10 flex gap-2 w-full">
+      {/* Comment section */}
+      <div className="flex flex-col w-full gap-2">
+        <div className="px-5 lg:px-10 flex gap-2 w-full">
+          <div className="avatar">
+            <div className="w-11 h-11 rounded-full cursor-pointer">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7B473dsmEpbIei9ehdCpGxtW9jDkgzgDazyIqa2eCbp6sD044n-ndxIvoropmqHa3KYw&usqp=CAU"
+                alt="Commentor profile"
+              />
+            </div>
+          </div>
+          <div className="w-fit h-fit px-3 py-2 rounded-2xl bg-lime-300">
+            <h3 className="text-sm font-semibold text-gray-700">
+              Michael Swell
+            </h3>
+            <p className="text-sm font-light text-gray-600">
+              This is an example comment to ail the disease of cornleaf
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Enter your comment */}
+      <div className="px-5 lg:px-10 flex gap-2 w-full pt-3">
         <div className="avatar">
           <div className="w-11 h-11 rounded-full cursor-pointer">
             <img

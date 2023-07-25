@@ -63,7 +63,6 @@ function FeedNavbar() {
                   </svg>
                 </div>
               </div>
-
               <h5 className="ml-3 pt-3 font-medium text-gray-500">Earlier</h5>
               <li className="pt-2">
                 <div className="flex flex-row cursor pointer hover:bg-gray-100 items-start">
