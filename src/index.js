@@ -22,7 +22,8 @@ const isUserAuthenticated = () => {
   // Replace this with your actual authentication check, e.g., check for a valid token in local storage
   const token = localStorage.getItem("authToken");
   // return !!token; // Return true if the token is present, false otherwise
-  return true;
+  console.log(token)
+  return token ? true : false;
 };
 const PrivateWrapper = ({ children }) => {
   return isUserAuthenticated() ? children : <Navigate to="/login" />;
@@ -43,9 +44,7 @@ root.render(
         <Route
           path="/login"
           element={
-            <LoginWrapper>
               <Login />
-            </LoginWrapper>
           }
         />
 
