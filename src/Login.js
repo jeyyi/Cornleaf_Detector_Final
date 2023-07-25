@@ -8,7 +8,6 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleLogin = async (e) => {
-    console.log(e)
     e.preventDefault();
     try {
       const payload = {
@@ -20,10 +19,9 @@ function Login() {
         payload
       )
       if (response.status === 200) {
-        console.log(response.data['refresh'])
         if (typeof window !== 'undefined') {
         localStorage.setItem('authToken', response.data['refresh']);
-        Navigate.push('/');
+        window.location = '/feed';
         }
       } else {
         alert('Invalid credentials');
@@ -53,11 +51,13 @@ function Login() {
               type="text"
               placeholder="Enter Username"
               className="input bg-white w-full max-w-xs rounded-sm text-sm"
+              value={email} onChange={(e) => setEmail(e.target.value)} 
             />
             <input
               type="password"
               placeholder="Enter Password"
               className="input bg-white w-full max-w-xs rounded-sm text-sm"
+              value={password} onChange={(e) => setPassword(e.target.value)}
             />
             <button className="btn w-full max-w-xs bg-green-400">Login</button>
           </form>
