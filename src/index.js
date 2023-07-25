@@ -7,6 +7,7 @@ import styles from "./index.css";
 import About from "./About";
 import Navigation from "./Components/Navigation";
 import Feed from "./Feed";
+import ProfileFeed from "./ProfileFeed";
 import Login from "./Login";
 import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
 import PrivateRoute from "./Components/ProtectedRoutes";
