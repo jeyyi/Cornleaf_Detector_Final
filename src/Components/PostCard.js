@@ -1,6 +1,6 @@
 import React from "react";
 
-function PostCard() {
+function PostCard({content, author, imageLink}) {
   return (
     <div className="w-full h-fit bg-white rounded-md shadow-md py-10">
       {/* Info div */}
@@ -9,14 +9,14 @@ function PostCard() {
           <div className="avatar">
             <div className="w-11 h-11 rounded-full cursor-pointer">
               <img
-                src="https://global.unitednations.entermediadb.net/assets/mediadb/services/module/asset/downloads/preset/Libraries/Production+Library/23-03-2022_WHO_Kenya-3.jpg/image1170x530cropped.jpg"
+                src={imageLink}
                 alt="Farmer profile"
               />
             </div>
           </div>
           <div>
             <h3 className="font-medium">
-              Arnel Pineda{" "}
+              {author}{" "}
               <span className="text-gray-400 font-normal text-sm">
                 added a post
               </span>
@@ -44,16 +44,11 @@ function PostCard() {
       </div>
       {/* Text section */}
       <p className="pt-5 px-5 lg:px-10">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum
-        molestie, sapien quis hendrerit scelerisque, arcu diam imperdiet felis,
-        id semper odio arcu quis odio. Donec interdum, quam in aliquet rhoncus,
-        tortor eros varius risus, non dignissim erat enim vel odio. Etiam id
-        scelerisque urna. Donec convallis fringilla eros, quis dignissim nisi
-        ornare non.
+        {content}
       </p>
       <div className="w-full h-96 mt-5 px-5 lg:px-10">
         <img
-          src="https://cropwatch.unl.edu/styles/hero/public/images/hero/2018/corn-Goss-NCLB-lesions-same-leaf.jpg?itok=rf8lYfKq"
+          src={imageLink}
           alt="Post leaf"
           className="w-full h-full object-cover"
         />
@@ -68,7 +63,7 @@ function PostCard() {
           <div className="avatar">
             <div className="w-11 h-11 rounded-full cursor-pointer">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7B473dsmEpbIei9ehdCpGxtW9jDkgzgDazyIqa2eCbp6sD044n-ndxIvoropmqHa3KYw&usqp=CAU"
+                src={imageLink}
                 alt="Commentor profile"
               />
             </div>
@@ -89,7 +84,7 @@ function PostCard() {
         <div className="avatar">
           <div className="w-11 h-11 rounded-full cursor-pointer">
             <img
-              src="https://media.licdn.com/dms/image/C4E12AQGJMHJYg2NzWg/article-cover_image-shrink_720_1280/0/1546512971231?e=2147483647&v=beta&t=8JEuNbLs3TuGKrF5xGCCaAb5ZbXYuLBdel0CNCTlBX4"
+              src={imageLink}
               alt="Farmer profile"
             />
           </div>

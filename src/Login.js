@@ -8,7 +8,6 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const handleLogin = async (e) => {
-    console.log(e)
     e.preventDefault();
     try {
       const payload = {

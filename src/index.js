@@ -17,6 +17,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import PrivateRoute from "./Components/ProtectedRoutes";
+import CreatePostPage from "./Components/CreatePostPage";
 
 const isUserAuthenticated = () => {
   // Replace this with your actual authentication check, e.g., check for a valid token in local storage
@@ -68,6 +69,7 @@ root.render(
           />
           <Route path="/about" element={<About />} />
         </Route>
+        <Route path="/create/post" element={<PrivateWrapper><CreatePostPage /></PrivateWrapper>} />
         <Route
           path="/feed"
           element={
