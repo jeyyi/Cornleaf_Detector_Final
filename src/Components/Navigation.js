@@ -15,14 +15,13 @@ function Navigation() {
       }
     };
 
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  
+
   return (
     <div className="drawer">
       <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
@@ -31,7 +30,9 @@ function Navigation() {
         <div className={`sticky top-0 w-full`}>
           <div
             className={`w-full navbar lg:px-64 lg:py-5 absolute  ${
-              navbarBackground === "transparent" ? "bg-transparent " : "bg-white "
+              navbarBackground === "transparent"
+                ? "bg-transparent "
+                : "bg-white "
             }transition-colors duration-500`}
           >
             <div className="flex-none lg:hidden">
@@ -61,6 +62,9 @@ function Navigation() {
                 {/* Navbar menu content here */}
                 <li>
                   <a href="/">Home</a>
+                </li>
+                <li>
+                  <a href="/feed">Feed</a>
                 </li>
                 <li>
                   <a href="/classify">Disease Classification</a>
@@ -104,6 +108,9 @@ function Navigation() {
           {/* Sidebar content here */}
           <li>
             <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/feed">Feed</a>
           </li>
           <li>
             <a href="/classify">Disease Classification</a>

@@ -10,7 +10,7 @@ function FeedSideBar() {
         {/* Menu */}
         <div className="flex flex-col">
           {/* Home */}
-          <div className="w-full h-12 flex px-10 items-center gap-5 hover:bg-lime-100 cursor-pointer">
+          <a href="/" className="w-full h-12 flex px-10 items-center gap-5 hover:bg-lime-100 cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -21,8 +21,8 @@ function FeedSideBar() {
               <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
             </svg>
 
-            <h3 className="text-gray-400 font-semibold">Home</h3>
-          </div>
+            <h3 className="text-gray-400 font-semibold" href="/">Home</h3>
+          </a>
           {/* Feed */}
           <div className="w-full h-12 bg-lime-100 flex px-10 items-center gap-5">
             <svg
@@ -40,7 +40,7 @@ function FeedSideBar() {
             <h3 className="text-gray-600 font-semibold">Feed</h3>
           </div>
           {/* Disease Classification */}
-          <div className="w-full h-12 flex px-10 items-center gap-5 hover:bg-lime-100 cursor-pointer">
+          <a href='/classify' className="w-full h-12 flex px-10 items-center gap-5 hover:bg-lime-100 cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -54,9 +54,9 @@ function FeedSideBar() {
               />
             </svg>
             <h3 className="text-gray-400 font-semibold">Classify Disease</h3>
-          </div>
+          </a>
           {/* About Us */}
-          <div className="w-full h-12 flex px-10 items-center gap-5 hover:bg-lime-100 cursor-pointer">
+          <a href="/about" className="w-full h-12 flex px-10 items-center gap-5 hover:bg-lime-100 cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -71,7 +71,7 @@ function FeedSideBar() {
               />
             </svg>
             <h3 className="text-gray-400 font-semibold">About Us</h3>
-          </div>
+          </a>
         </div>
         <div className="divider" />
         <h3 className="px-5 pb-5 text-lg font-bold text-gray-400">
