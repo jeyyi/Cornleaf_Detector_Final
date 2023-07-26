@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import FeedNavbar from "./Components/FeedNavbar";
 import FeedSideBar from "./Components/FeedSideBar";
 import CreatePostCard from "./Components/CreatePostCard";
-import CreatePostModal from "./Components/CreatePostModal";
+import CreatePost from "./Components/CreatePost";
 import PostCard from "./Components/PostCard";
 function ProfileFeed() {
   const handleFileChange = (event) => {
@@ -15,7 +15,6 @@ function ProfileFeed() {
   }, []);
   return (
     <>
-      <CreatePostModal />
       <div className="min-h-screen bg-base-100">
         <FeedNavbar />
         <div className="w-full h-full px-5 lg:px-10 py-5 flex gap-10">
@@ -52,7 +51,7 @@ function ProfileFeed() {
             </div>
             {/* Posts feed */}
             <div className="pt-3">
-              <CreatePostCard />
+              <CreatePost />
               <div className="w-full rounded-lg shadow-md mt-2 flex">
                 <h3 className="text-xl font-semibold px-5 py-3 flex-1">
                   6 Total Posts
