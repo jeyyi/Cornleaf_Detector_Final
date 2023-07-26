@@ -1,6 +1,14 @@
 import React from "react";
 import Logo from "../Assets/logo_white.png";
 function FeedNavbar() {
+
+  const handleLogout = () => {
+    // Remove the token from localStorage
+    localStorage.removeItem('authToken');
+    // Redirect the user to the login page or any other page after logout
+    // For example, you can redirect to the login page:
+    window.location.href = '/login';
+  };
   return (
     <div className="border-b-2 bg-lime-600 flex flex-row w-full px-5 lg:px-10 py-4 sticky top-0 z-10">
       <div className="justify-between w-full flex flex-row">
@@ -138,7 +146,7 @@ function FeedNavbar() {
               </li>
 
               <li>
-                <a href="/">
+                <a href="/" onClick={handleLogout}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
