@@ -4,6 +4,7 @@ import FeedSideBar from "./Components/FeedSideBar";
 import CreatePostModal from "./Components/CreatePostModal";
 import CreatePostCard from "./Components/CreatePostCard";
 import PostCard from "./Components/PostCard";
+import FarmerStats from "./Components/FarmerStats";
 function Feed() {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -36,6 +37,9 @@ function Feed() {
               <PostCard />
               <PostCard />
             </div>
+          </div>
+          <div className="px-5 hidden lg:flex flex-1 sticky top-28 right-0 h-fit">
+            <FarmerStats/>
           </div>
         </div>
       </div>
