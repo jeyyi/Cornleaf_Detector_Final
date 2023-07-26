@@ -88,7 +88,7 @@ export default function CreatePostPage() {
                 </button>
               </div>
             </div>
-            <div className="divider"/>
+            <div className="divider" />
             <div className="flex gap-2">
               {/* Avatar */}
               <div className="avatar">
@@ -102,7 +102,9 @@ export default function CreatePostPage() {
               {/* Name */}
               <div>
                 <h3 className="font-medium text-gray-700">Juan Dela Cruz</h3>
-                <h5 className="bg-gray-300 p-1 flex justify-center rounded-full text-sm font-light">Farmer</h5>
+                <h5 className="bg-gray-300 p-1 flex justify-center rounded-full text-sm font-light">
+                  Farmer
+                </h5>
               </div>
             </div>
             <textarea
@@ -119,6 +121,49 @@ export default function CreatePostPage() {
               <div className="h-full w-20 bg-gray-600 cursor-pointer" />
               <div className="h-full w-20 bg-gray-600 cursor-pointer flex items-center justify-center text-white text-2xl">
                 4+
+              </div>
+            </div>
+            {/* Tags */}
+            <div className="divider" />
+            <div>
+              <h3 className="font-medium pt-2">Tag</h3>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="form-control">
+                  <label className="cursor-pointer label">
+                    <span className="label-text">Blight</span>
+                    <input
+                      type="checkbox"
+                      className="checkbox checkbox-primary"
+                    />
+                  </label>
+                </div>
+                <div className="form-control">
+                  <label className="cursor-pointer label">
+                    <span className="label-text">Rust</span>
+                    <input
+                      type="checkbox"
+                      className="checkbox checkbox-primary"
+                    />
+                  </label>
+                </div>
+                <div className="form-control">
+                  <label className="cursor-pointer label">
+                    <span className="label-text">Gray Leaf Spot</span>
+                    <input
+                      type="checkbox"
+                      className="checkbox checkbox-primary"
+                    />
+                  </label>
+                </div>
+                <div className="form-control">
+                  <label className="cursor-pointer label">
+                    <span className="label-text">Other</span>
+                    <input
+                      type="checkbox"
+                      className="checkbox checkbox-primary"
+                    />
+                  </label>
+                </div>
               </div>
             </div>
             <div className="w-full rounded-md border border-gray-300 py-4 mt-2 flex px-3">
