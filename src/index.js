@@ -24,7 +24,7 @@ const isUserAuthenticated = () => {
   const token = localStorage.getItem("authToken");
   // return !!token; // Return true if the token is present, false otherwise
   console.log(token)
-  return token ? true : true;
+  return token ? true : false;
 };
 const PrivateWrapper = ({ children }) => {
   return isUserAuthenticated() ? children : <Navigate to="/login" />;

@@ -65,28 +65,10 @@ export default function CreatePostPage() {
         <div className="w-full lg:w-1/2">
           <form
             onSubmit={handleCreatePost}
-            className="shadow-md p-5 rounded-md w-3/4"
+            className="shadow-md p-5 rounded-md w-full lg:w-3/4"
           >
             <div className="flex justify-between items-center">
               <h3 className="font-bold text-lg">Create Post</h3>
-              <div className="modal-action -mt-0">
-                <button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-              </div>
             </div>
             <div className="divider" />
             <div className="flex gap-2">

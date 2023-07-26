@@ -29,10 +29,10 @@ function Navigation() {
         {/* Navbar */}
         <div className={`sticky top-0 w-full`}>
           <div
-            className={`w-full navbar lg:px-64 lg:py-5 absolute  ${
+            className={`w-full navbar lg:px-64 lg:py-0 absolute  ${
               navbarBackground === "transparent"
                 ? "bg-transparent "
-                : "bg-white "
+                : "bg-base-100 "
             }transition-colors duration-500`}
           >
             <div className="flex-none lg:hidden">
@@ -104,10 +104,11 @@ function Navigation() {
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 h-full bg-base-200">
+        <ul className="menu p-4 w-80 h-full bg-lime-300 text-xl text-lime-600 font-bold">
           {/* Sidebar content here */}
-          <li>
-            <a href="/">Home</a>
+          <img src={Logo} alt="Logo for side" className="w-48 pt-5 mx-auto"/>
+          <li className="pt-10">
+            <a href="/" className="text-black text-2xl">Home</a>
           </li>
           <li>
             <a href="/feed">Feed</a>
@@ -118,6 +119,7 @@ function Navigation() {
           <li>
             <a href="/about">About us</a>
           </li>
+          <div className="fixed bottom-0 text-lime-900 font-light text-xs">@Copyright Cornleaf Disease 2023</div>
         </ul>
       </div>
     </div>
