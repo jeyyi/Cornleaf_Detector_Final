@@ -139,6 +139,15 @@ export default function CreatePostPage() {
                 </div>
                 <div className="form-control">
                   <label className="cursor-pointer label">
+                    <span className="label-text">Healthy</span>
+                    <input
+                      type="checkbox"
+                      className="checkbox checkbox-primary"
+                    />
+                  </label>
+                </div>
+                <div className="form-control">
+                  <label className="cursor-pointer label">
                     <span className="label-text">Other</span>
                     <input
                       type="checkbox"
