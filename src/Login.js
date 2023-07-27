@@ -39,7 +39,7 @@ function Login() {
       if (messageElement) {
         messageElement.style.display = "block";
       }
-      loginBtn.innerText="Login"
+      loginBtn.innerText = "Login";
     }
   };
 
