@@ -1,6 +1,6 @@
 import React from "react";
 
-function PostCard({content, author, imageLink}) {
+function PostCard({ content, author, imageLink }) {
   return (
     <div className="w-full h-fit bg-white rounded-md shadow-md py-10">
       {/* Info div */}
@@ -8,10 +8,7 @@ function PostCard({content, author, imageLink}) {
         <div className="flex gap-2 flex-1">
           <div className="avatar">
             <div className="w-11 h-11 rounded-full cursor-pointer">
-              <img
-                src={imageLink}
-                alt="Farmer profile"
-              />
+              <img src={imageLink} alt="Farmer profile" />
             </div>
           </div>
           <div>
@@ -43,9 +40,7 @@ function PostCard({content, author, imageLink}) {
         </div>
       </div>
       {/* Text section */}
-      <p className="pt-5 px-5 lg:px-10">
-        {content}
-      </p>
+      <p className="pt-5 px-5 lg:px-10">{content}</p>
       <div className="w-full h-96 mt-5 px-5 lg:px-10">
         <img
           src={imageLink}
@@ -62,16 +57,17 @@ function PostCard({content, author, imageLink}) {
         <div className="px-5 lg:px-10 flex gap-2 w-full">
           <div className="avatar">
             <div className="w-11 h-11 rounded-full cursor-pointer">
-              <img
-                src={imageLink}
-                alt="Commentor profile"
-              />
+              <img src={imageLink} alt="Commentor profile" />
             </div>
           </div>
           <div className="w-fit h-fit px-3 py-2 rounded-2xl bg-lime-300">
-            <h3 className="text-sm font-semibold text-gray-700">
-              Michael Swell
-            </h3>
+            <div className="flex">
+              <h3 className="text-sm font-semibold text-gray-700">
+                Michael Swell
+              </h3>
+              <div className="badge badge-primary ml-2 text-sm font-light">Expert</div>
+            </div>
+
             <p className="text-sm font-light text-gray-600">
               This is an example comment to ail the disease of cornleaf
             </p>
@@ -83,10 +79,7 @@ function PostCard({content, author, imageLink}) {
       <div className="px-5 lg:px-10 flex gap-2 w-full pt-3">
         <div className="avatar">
           <div className="w-11 h-11 rounded-full cursor-pointer">
-            <img
-              src={imageLink}
-              alt="Farmer profile"
-            />
+            <img src={imageLink} alt="Farmer profile" />
           </div>
         </div>
         <input
