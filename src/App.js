@@ -8,7 +8,7 @@ function App() {
   const [prediction, setPrediction] = useState(null);
   const [model, setModel] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(0);
-  const [modelName, setModelName] = useState("Inception")
+  const [modelName, setModelName] = useState("Inception");
 
   useEffect(() => {
     async function loadModel() {
@@ -25,13 +25,13 @@ function App() {
     }
     loadModel();
   }, []);
-  
-  const changeModel = () =>{
-    const selectbox = document.getElementById('select_model');
+
+  const changeModel = () => {
+    const selectbox = document.getElementById("select_model");
     const selectedValue = selectbox.options[selectbox.selectedIndex].value;
     setModelName(selectedValue);
     window.my_modal_4.showModal();
-  }
+  };
 
   /* async function loadXception() {
     try {
@@ -66,7 +66,7 @@ function App() {
           const result = labels[predictedClassIndex];
           setPrediction(result);
           const closebutton = document.getElementById("closeButton");
-          closebutton.click()
+          closebutton.click();
         };
       };
 
@@ -81,7 +81,8 @@ function App() {
     return (
       <div className="flex flex-col items-center h-screen bg-gradient-to-bl from-lime-100 to-amber-200 justify-center">
         <p className="text-2xl font-thin">
-        <span className="loading loading-ring loading-md"></span>Loading models
+          <span className="loading loading-ring loading-md"></span>Loading
+          models
         </p>
         <p className="text-lg font-light">
           Progress:{" "}
@@ -109,7 +110,9 @@ function App() {
             <span className="loading loading-spinner loading-lg"></span>
           </p>
           <div className="modal-action hidden">
-            <button className="btn" id="closeButton">Close</button>
+            <button className="btn" id="closeButton">
+              Close
+            </button>
           </div>
         </form>
       </dialog>
@@ -117,18 +120,25 @@ function App() {
       <dialog id="my_modal_4" className="modal modal-bottom sm:modal-middle">
         <form method="dialog" className="modal-box bg-primary">
           <h3 className="font-bold text-lg">You are currently using</h3>
-          <p className="py-4 items-center">
-            {modelName}
-          </p>
+          <p className="py-4 items-center">{modelName}</p>
           <div className="modal-action">
-            <button className="btn bg-red-400 text-white border-none" id="closeButton">Close</button>
+            <button
+              className="btn bg-red-400 text-white border-none"
+              id="closeButton"
+            >
+              Close
+            </button>
           </div>
         </form>
       </dialog>
       <h1 className="text-3xl font-semibold">Classify Disease</h1>
       <div className="flex flex-col lg:flex-row gap-3 mt-5 items-center">
         <h3>Select Model:</h3>
-        <select className="select select-bordered select-primary bg-primary" id="select_model" onChange={changeModel}>
+        <select
+          className="select select-bordered select-primary bg-primary"
+          id="select_model"
+          onChange={changeModel}
+        >
           <option disabled>Pick one</option>
           <option value="Inception">Inception</option>
           <option value="Xception">Xception</option>
@@ -144,12 +154,29 @@ function App() {
           />
         )}
       </div>
-      {prediction && (
-        <p className="text-xl mt-5">
-          Prediction:
-          <span className="font-bold text-2xl">{" " + prediction}</span>
-        </p>
-      )}
+      <div className="flex items-end">
+        {prediction && (
+          <p className="text-xl mt-5">
+            Prediction:
+            <span className="font-bold text-2xl">{" " + prediction}</span>
+          </p>
+        )}
+        <div className="tooltip ml-2 cursor-pointer" data-tip="Share">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            className="w-8 h-8"
+          >
+            <path
+              fillRule="evenodd"
+              d="M15.75 4.5a3 3 0 11.825 2.066l-8.421 4.679a3.002 3.002 0 010 1.51l8.421 4.679a3 3 0 11-.729 1.31l-8.421-4.678a3 3 0 110-4.132l8.421-4.679a3 3 0 01-.096-.755z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </div>
+      </div>
+
       <label htmlFor="file" className="btn btn-primary btn-wide mt-10">
         Upload Image
         <span>

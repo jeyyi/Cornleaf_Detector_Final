@@ -96,7 +96,7 @@ export default function CreatePostPage() {
               onChange={(e) => setContent(e.target.value)}
             ></textarea>
             {/* Photo Carousel, hide mo nalang to sir pag wala pang photo */}
-            <div className="w-full h-20 mt-2 flex gap-3 hidden">
+            <div id="photo_carousel" className="w-full h-20 mt-2 flex gap-3">
               {/* Photo placeholder */}
               <div className="h-full w-20 bg-gray-600 cursor-pointer" />
               <div className="h-full w-20 bg-gray-600 cursor-pointer" />
