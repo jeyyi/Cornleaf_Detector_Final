@@ -63,6 +63,7 @@ function Feed() {
               ))}
             </div>
           </div>
+           {/* Pa hide nalang neto sa expert sir */}
           <div className="px-5 hidden lg:flex flex-1 sticky top-28 right-0 h-fit">
             <FarmerStats />
           </div>

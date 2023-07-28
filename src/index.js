@@ -9,6 +9,7 @@ import Navigation from "./Components/Navigation";
 import Feed from "./Feed";
 import ProfileFeed from "./ProfileFeed";
 import Login from "./Login";
+import FarmerStats from "./FarmerStatsPage";
 import {
   BrowserRouter,
   Routes,
@@ -83,6 +84,14 @@ root.render(
           element={
             <PrivateWrapper>
               <ProfileFeed />
+            </PrivateWrapper>
+          }
+        />
+         <Route
+          path="/farmerstats"
+          element={
+            <PrivateWrapper>
+              <FarmerStats />
             </PrivateWrapper>
           }
         />

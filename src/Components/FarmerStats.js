@@ -62,7 +62,7 @@ function FarmerStats() {
             maxDate={new Date()}
           ></DatePicker>
         </div>
-        <BarChart width={380} height={250} className="pt-5 mb-5 " data={data}>
+        <BarChart width={320} height={250} className="pt-5 mb-5 " data={data}>
           <CartesianGrid strokeDasharray="1" />
           <XAxis dataKey="name" tick={{ fill: "#eef0ed", fontSize: 13 }} />
           <YAxis />
