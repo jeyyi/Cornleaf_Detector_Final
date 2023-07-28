@@ -4,6 +4,7 @@ import FeedSideBar from "./Components/FeedSideBar";
 import CreatePostCard from "./Components/CreatePostCard";
 import CreatePost from "./Components/CreatePost";
 import PostCard from "./Components/PostCard";
+import FarmerStats from "./Components/FarmerStats";
 function ProfileFeed() {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -46,7 +47,9 @@ function ProfileFeed() {
                 <h3 className="lg:text-3xl text-xl font-semibold pt-3 pl-3">
                   Juan Dela Cruz
                 </h3>
-                <h5 className="pl-3 text-base lg:text-lg text-gray-500">Farmer</h5>
+                <h5 className="pl-3 text-base lg:text-lg text-gray-500">
+                  Farmer
+                </h5>
               </div>
             </div>
             {/* Posts feed */}
@@ -82,6 +85,9 @@ function ProfileFeed() {
                 <PostCard />
               </div>
             </div>
+          </div>
+          <div className="px-5 hidden lg:flex flex-1 sticky top-28 right-0 h-fit">
+            <FarmerStats />
           </div>
         </div>
       </div>
