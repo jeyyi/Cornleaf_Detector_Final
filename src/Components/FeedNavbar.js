@@ -1,13 +1,12 @@
 import React from "react";
 import Logo from "../Assets/logo_white.png";
 function FeedNavbar() {
-
   const handleLogout = () => {
     // Remove the token from localStorage
-    localStorage.removeItem('authToken');
+    localStorage.removeItem("authToken");
     // Redirect the user to the login page or any other page after logout
     // For example, you can redirect to the login page:
-    window.location.href = '/login';
+    window.location.href = "/login";
   };
   return (
     <div className="border-b-2 bg-lime-600 flex flex-row w-full px-5 lg:px-10 py-4 sticky top-0 z-10">
@@ -144,7 +143,19 @@ function FeedNavbar() {
                   My Feed
                 </a>
               </li>
-
+              <li className="block lg:hidden">
+                <a href="/">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-6 h-6 text-lime-700"
+                  >
+                    <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z" />
+                  </svg>
+                  Stats
+                </a>
+              </li>
               <li>
                 <a href="/" onClick={handleLogout}>
                   <svg

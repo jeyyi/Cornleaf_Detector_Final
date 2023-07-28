@@ -123,7 +123,7 @@ function App() {
           <p className="py-4 items-center">{modelName}</p>
           <div className="modal-action">
             <button
-              className="btn bg-red-400 text-white border-none"
+              className="btn bg-gray-700 text-white border-none"
               id="closeButton"
             >
               Close
@@ -154,29 +154,29 @@ function App() {
           />
         )}
       </div>
-      <div className="flex items-end">
-        {prediction && (
+      {prediction && (
+        <div className="flex items-end">
           <p className="text-xl mt-5">
             Prediction:
             <span className="font-bold text-2xl">{" " + prediction}</span>
           </p>
-        )}
-        <div className="tooltip ml-2 cursor-pointer" data-tip="Share">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="w-8 h-8"
-          >
-            <path
-              fillRule="evenodd"
-              d="M15.75 4.5a3 3 0 11.825 2.066l-8.421 4.679a3.002 3.002 0 010 1.51l8.421 4.679a3 3 0 11-.729 1.31l-8.421-4.678a3 3 0 110-4.132l8.421-4.679a3 3 0 01-.096-.755z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </div>
-      </div>
 
+          <div className="tooltip ml-2 cursor-pointer" data-tip="Share">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-8 h-8"
+            >
+              <path
+                fillRule="evenodd"
+                d="M15.75 4.5a3 3 0 11.825 2.066l-8.421 4.679a3.002 3.002 0 010 1.51l8.421 4.679a3 3 0 11-.729 1.31l-8.421-4.678a3 3 0 110-4.132l8.421-4.679a3 3 0 01-.096-.755z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </div>
+        </div>
+      )}
       <label htmlFor="file" className="btn btn-primary btn-wide mt-10">
         Upload Image
         <span>

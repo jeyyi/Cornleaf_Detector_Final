@@ -10,6 +10,8 @@ import {
   Legend,
 } from "recharts";
 import "react-datepicker/dist/react-datepicker.css";
+import { Pie } from "react-chartjs-2";
+import "chart.js/auto";
 
 function FarmerStats() {
   /* Sample Data */
@@ -18,8 +20,18 @@ function FarmerStats() {
     { name: "Blight", value: 12 },
     { name: "Rust", value: 6 },
     { name: "Gray Spot", value: 10 },
-    
   ];
+  const chartdata = {
+    labels: ["Blight", "Gray Leaf Spot", "Rust","Healthy"],
+    datasets: [
+      {
+        data: [90, 42, 32,128],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56","#55eb34"],
+        hoverBackgroundColor: ["#fa4b71", "#2799e6", "#fcbd1c","#2ba611"],
+      },
+    ],
+  };
+
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDateChange = (date) => {
@@ -29,25 +41,9 @@ function FarmerStats() {
     const options = { year: "numeric", month: "short", day: "2-digit" };
     return new Date(date).toLocaleDateString(undefined, options);
   };
-
-  const calendarIcon = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className="w-6 h-6"
-    >
-      <path d="M12.75 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM7.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM8.25 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM9.75 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM10.5 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM12.75 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM14.25 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 17.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 15.75a.75.75 0 100-1.5.75.75 0 000 1.5zM15 12.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM16.5 13.5a.75.75 0 100-1.5.75.75 0 000 1.5z" />
-      <path
-        fillRule="evenodd"
-        d="M6.75 2.25A.75.75 0 017.5 3v1.5h9V3A.75.75 0 0118 3v1.5h.75a3 3 0 013 3v11.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V7.5a3 3 0 013-3H6V3a.75.75 0 01.75-.75zm13.5 9a1.5 1.5 0 00-1.5-1.5H5.25a1.5 1.5 0 00-1.5 1.5v7.5a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5v-7.5z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
   return (
-    <>
-      <div className="w-full shadow-md rounded-md bg-lime-600">
+    <div>
+      <div className="w-full shadow-md rounded-md bg-lime-600 pb-5 pr-8">
         {/* Header */}
         <div className="flex justify-between px-3 items-center">
           <div>
@@ -68,13 +64,30 @@ function FarmerStats() {
         </div>
         <BarChart width={380} height={250} className="pt-5 mb-5 " data={data}>
           <CartesianGrid strokeDasharray="1" />
-          <XAxis dataKey="name" tick={{ fill: "#eef0ed", fontSize:13 }} />
+          <XAxis dataKey="name" tick={{ fill: "#eef0ed", fontSize: 13 }} />
           <YAxis />
           <Tooltip />
           <Bar dataKey="value" fill="#d0edca" />
         </BarChart>
       </div>
-    </>
+      {/* Pie Chart */}
+      <div className="w-full shadow-md rounded-md bg-white mt-10 pb-5">
+        {/* Header */}
+        <div className="flex justify-between px-3 items-center">
+          <div className="w-full">
+            <h3 className="pt-5 text-2xl font-medium text-lime-700">
+              Total Stats
+            </h3>
+            <h5 className="text-gray-500 text-sm">
+              As of {new Date().toDateString()}
+            </h5>
+            <div className="w-full h-full flex items-center justify-center">
+              <Pie data={chartdata} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 

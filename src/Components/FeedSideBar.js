@@ -24,6 +24,7 @@ function FeedSideBar() {
             <h3 className="text-gray-400 font-semibold" href="/">Home</h3>
           </a>
           {/* Feed */}
+          <a href="/feed">
           <div className="w-full h-12 bg-lime-100 flex px-10 items-center gap-5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -39,6 +40,7 @@ function FeedSideBar() {
             </svg>
             <h3 className="text-gray-600 font-semibold">Feed</h3>
           </div>
+          </a>
           {/* Disease Classification */}
           <a href='/classify' className="w-full h-12 flex px-10 items-center gap-5 hover:bg-lime-100 cursor-pointer">
             <svg
