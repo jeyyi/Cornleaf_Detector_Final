@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Logo from "./Assets/Logo.png";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+import jwt from "jwt-decode";
 
 function Login() {
   // Set the new title when the component mounts
@@ -25,15 +26,30 @@ function Login() {
         "https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/auth/jwt/create/",
         payload
       );
+      const user_token = response.data["access"]
+      const user_id = jwt(user_token)['user_id']
+      console.log(user_id)
+      console.log(user_token)
+      const user_response = await axios.get(
+        `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/auth/users/${user_id}`,
+        {
+          headers: {
+            "Authorization": `Bearer ${user_token}`
+          },
+        }
+      );
+      console.log(user_response.data)
       if (response.status === 200) {
         if (typeof window !== "undefined") {
-          localStorage.setItem("authToken", response.data["refresh"]);
+          localStorage.setItem("authToken", response.data["access"]);
+          localStorage.setItem("user", JSON.stringify(user_response.data));
           window.location = "/feed";
         }
       } else {
         alert("Error");
       }
     } catch (error) {
+      console.log(error)
       var messageElement = document.getElementById("invalid_message");
       console.log(messageElement);
       if (messageElement) {

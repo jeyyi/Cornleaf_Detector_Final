@@ -77,15 +77,12 @@ function ProfileFeed() {
               </div>
               {/* Posts go here */}
               <div className="flex flex-col pt-3 gap-2">
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
-                <PostCard />
+              {/*   <PostCard /> */}
+            
               </div>
             </div>
           </div>
+          {/* Pa hide nalang neto sa expert sir */}
           <div className="px-5 hidden lg:flex flex-1 sticky top-28 right-0 h-fit">
             <FarmerStats />
           </div>

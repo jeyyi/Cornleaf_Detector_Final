@@ -1,6 +1,8 @@
+import { image } from "@tensorflow/tfjs-core";
 import React from "react";
 
-function PostCard({ content, author, imageLink }) {
+function PostCard({ content, author, authorType, authorImage, datePosted, imageLink, tags  }) {
+  console.log(tags)
   return (
     <div className="w-full h-fit bg-white rounded-md shadow-md py-10">
       {/* Info div */}
@@ -8,18 +10,18 @@ function PostCard({ content, author, imageLink }) {
         <div className="flex gap-2 flex-1">
           <div className="avatar">
             <div className="w-11 h-11 rounded-full cursor-pointer">
-              <img src={imageLink} alt="Farmer profile" />
+              <img src={authorImage} alt="Farmer profile" /> ei
             </div>
           </div>
           <div>
             <h3 className="font-medium">
-              {author}{" "}
+              {author}{" "} <b>({authorType})</b> {" "}
               <span className="text-gray-400 font-normal text-sm">
                 added a post
               </span>
             </h3>
             <p className="font-light text-sm text-gray-400">
-              Tuesday at 9:30pm
+              {datePosted}
             </p>
           </div>
         </div>
@@ -41,13 +43,19 @@ function PostCard({ content, author, imageLink }) {
       </div>
       {/* Text section */}
       <p className="pt-5 px-5 lg:px-10">{content}</p>
-      <div className="w-full h-96 mt-5 px-5 lg:px-10">
+      {imageLink ? (
+        <div className="w-full h-96 mt-5 px-5 lg:px-10">
         <img
           src={imageLink}
           alt="Post leaf"
           className="w-full h-full object-cover"
         />
       </div>
+      ) : <div></div>}
+
+      <p className="pt-5 px-5 lg:px-10 text-gray-400 text-sm">
+         {tags.length !== 0 ? (<b>tags: {tags}</b>) : <></>}
+      </p>
       <p className="pt-5 px-5 lg:px-10 text-gray-400 text-sm font-light">
         1 comment
       </p>
@@ -79,7 +87,7 @@ function PostCard({ content, author, imageLink }) {
       <div className="px-5 lg:px-10 flex gap-2 w-full pt-3">
         <div className="avatar">
           <div className="w-11 h-11 rounded-full cursor-pointer">
-            <img src={imageLink} alt="Farmer profile" />
+            <img src={authorImage} alt="Farmer profile" />
           </div>
         </div>
         <input
