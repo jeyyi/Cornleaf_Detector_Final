@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import FeedNavbar from "./FeedNavbar";
 import axios from "axios";
 import FeedSideBar from "./FeedSideBar";
-import jwt from 'jwt-decode'
 
 export default function CreatePostPage() {
   // const [author, setAuthor] = useState('');
   const [content, setContent] = useState("");
   const [pictures, setPictures] = useState("");
   
-  const user = jwt(localStorage.getItem("user"))
+  const user = JSON.parse(localStorage.getItem("user"))
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     console.log(user)

@@ -5,7 +5,6 @@ import CreatePostModal from "./Components/CreatePostModal";
 import CreatePostCard from "./Components/CreatePostCard";
 import PostCard from "./Components/PostCard";
 import FarmerStats from "./Components/FarmerStats";
-import jwt from 'jwt-decode'
 import CreatePost from "./Components/CreatePost";
 function Feed() {
   const [posts, setPosts] = useState([]);
@@ -57,7 +56,7 @@ function Feed() {
                 <div key={post.id}>
                   <PostCard 
                     author={user.first_name + ' ' + user.last_name} 
-                    authorType={user.user_type == 'user'? 'farmer': 'expert'}
+                    authorType={user.user_type == 'user' ? 'farmer': 'expert'}
                     authorImage={user.picture}
                     datePosted={post.date_posted} 
                     content={post.content} 
@@ -68,10 +67,10 @@ function Feed() {
               ))}
             </div>
           </div>
-           {/* Pa hide nalang neto sa expert sir */}
-          <div className="px-5 hidden lg:flex flex-1 sticky top-28 right-0 h-fit">
+           {user.user_type == 'user' ?
+          (<div className="px-5 hidden lg:flex flex-1 sticky top-28 right-0 h-fit">
             <FarmerStats />
-          </div>
+          </div>) : <></>}
         </div>
       </div>
     </>
