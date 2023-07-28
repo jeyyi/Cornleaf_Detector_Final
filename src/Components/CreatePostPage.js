@@ -7,12 +7,15 @@ export default function CreatePostPage() {
   // const [author, setAuthor] = useState('');
   const [content, setContent] = useState("");
   const [pictures, setPictures] = useState("");
+  const [blight, setBlight] = useState(false);
+  const [rust, setRust] = useState(false);
+  const [grayLeafSpot, setGrayLeafSpot] = useState(false);
+  const [healthy, setHealthy] = useState(false);
+  const [other, setOther] = useState(false);
   
   const user = JSON.parse(localStorage.getItem("user"))
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log(user)
-    console.log(file)
     setPictures(file);
     // Do something with the selected file
     console.log("Selected file:", file);
@@ -25,8 +28,14 @@ export default function CreatePostPage() {
 
       const formData = new FormData();
       formData.append("content", content);
-      formData.append("pictures", pictures);
-      formData.append("author", 1);
+      formData.append("image", pictures);
+      formData.append("author", user.id);
+      formData.append("blight", blight);
+      formData.append("rust", rust);
+      formData.append("gray_leaf_spot", grayLeafSpot);
+      formData.append("healthy", healthy);
+      formData.append("other", other);
+
       const response = await axios.post(
         "https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/",
         formData,
@@ -49,6 +58,7 @@ export default function CreatePostPage() {
       console.error("Login failed:", error);
     }
   };
+
 
   return (
     <div className="min-h-screen bg-base-100">
@@ -73,16 +83,16 @@ export default function CreatePostPage() {
               <div className="avatar">
                 <div className="w-12 h-12 rounded-full cursor-pointer">
                   <img
-                    src="https://media.licdn.com/dms/image/C4E12AQGJMHJYg2NzWg/article-cover_image-shrink_720_1280/0/1546512971231?e=2147483647&v=beta&t=8JEuNbLs3TuGKrF5xGCCaAb5ZbXYuLBdel0CNCTlBX4"
+                    src={user.picture}
                     alt="Farmer profile"
                   />
                 </div>
               </div>
               {/* Name */}
               <div>
-                <h3 className="font-medium text-gray-700">Juan Dela Cruz</h3>
+                <h3 className="font-medium text-gray-700">{user.first_name} {user.last_name}</h3>
                 <h5 className="bg-gray-300 p-1 flex justify-center rounded-full text-sm font-light">
-                  Farmer
+                  {user.user_type}
                 </h5>
               </div>
             </div>
@@ -113,6 +123,8 @@ export default function CreatePostPage() {
                     <input
                       type="checkbox"
                       className="checkbox checkbox-primary"
+                      onClick={(e) => setBlight(e.target.checked)}
+                      value={blight}
                     />
                   </label>
                 </div>
@@ -122,6 +134,8 @@ export default function CreatePostPage() {
                     <input
                       type="checkbox"
                       className="checkbox checkbox-primary"
+                      onChange={(e) => setRust(e.target.checked)}
+                      value={rust}
                     />
                   </label>
                 </div>
@@ -131,6 +145,8 @@ export default function CreatePostPage() {
                     <input
                       type="checkbox"
                       className="checkbox checkbox-primary"
+                      onChange={(e) => setGrayLeafSpot(e.target.checked)}
+                      value={grayLeafSpot}
                     />
                   </label>
                 </div>
@@ -140,6 +156,8 @@ export default function CreatePostPage() {
                     <input
                       type="checkbox"
                       className="checkbox checkbox-primary"
+                      onChange={(e) => setHealthy(e.target.checked)}
+                      value={healthy}
                     />
                   </label>
                 </div>
@@ -149,6 +167,9 @@ export default function CreatePostPage() {
                     <input
                       type="checkbox"
                       className="checkbox checkbox-primary"
+                      onChange={(e) => setOther(e.target.checked)}
+                      value={other}
+
                     />
                   </label>
                 </div>
