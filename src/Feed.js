@@ -8,8 +8,8 @@ import FarmerStats from "./Components/FarmerStats";
 import jwt from 'jwt-decode'
 import CreatePost from "./Components/CreatePost";
 function Feed() {
-  const [posts, setPosts] = useState([])
- 
+  const [posts, setPosts] = useState([]);
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     // Do something with the selected file
@@ -22,13 +22,15 @@ function Feed() {
 
     const fetchPosts = async () => {
       try {
-        const response = await fetch('https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/'); // Replace with your API endpoint
+        const response = await fetch(
+          "https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/"
+        ); // Replace with your API endpoint
         const data = await response.json();
 
         
         setPosts(data); // Update the state with the fetched posts
       } catch (error) {
-        console.error('Error fetching posts:', error);
+        console.error("Error fetching posts:", error);
       }
     };
 
@@ -46,22 +48,25 @@ function Feed() {
           {/* Feed div */}
           <div className="w-full lg:w-1/2">
             {/* Write a post */}
-      <CreatePost/>
+            <CreatePost />
 
             {/* Start posts */}
             <div className="pt-5 flex flex-col gap-3">
-
               {posts.map((post) => (
                 <div key={post.id}>
-                  <PostCard author={user.first_name + ' ' + user.last_name} datePosted={post.date_posted} content={post.content} imageLink={post.image}/>
+                  <PostCard 
+                    author={user.first_name + ' ' + user.last_name} 
+                    datePosted={post.date_posted} 
+                    content={post.content} 
+                    imageLink={post.image}
+                  />
                 </div>
               ))}
-              
-              
             </div>
           </div>
+           {/* Pa hide nalang neto sa expert sir */}
           <div className="px-5 hidden lg:flex flex-1 sticky top-28 right-0 h-fit">
-            <FarmerStats/>
+            <FarmerStats />
           </div>
         </div>
       </div>
