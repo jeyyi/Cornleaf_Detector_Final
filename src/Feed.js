@@ -4,20 +4,19 @@ import FeedSideBar from "./Components/FeedSideBar";
 import CreatePostModal from "./Components/CreatePostModal";
 import CreatePostCard from "./Components/CreatePostCard";
 import PostCard from "./Components/PostCard";
-//<<<<<<< HEAD
 import FarmerStats from "./Components/FarmerStats";
-//=======
+import jwt from 'jwt-decode'
 import CreatePost from "./Components/CreatePost";
-//>>>>>>> 824ec80131b2bc19a33fe872b05a0a719f47ea66
 function Feed() {
   const [posts, setPosts] = useState([])
  
   const handleFileChange = (event) => {
-    console.log(event)
     const file = event.target.files[0];
     // Do something with the selected file
     console.log("Selected file:", file);
   };
+  
+  const user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     document.title = "Feed-Cornleaf Disease Classifier";
 
@@ -25,7 +24,8 @@ function Feed() {
       try {
         const response = await fetch('https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/'); // Replace with your API endpoint
         const data = await response.json();
-        console.log(data)
+
+        
         setPosts(data); // Update the state with the fetched posts
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -53,7 +53,7 @@ function Feed() {
 
               {posts.map((post) => (
                 <div key={post.id}>
-                  <PostCard author={post.author} content={post.content} imageLink={post.pictures}/>
+                  <PostCard author={user.first_name + ' ' + user.last_name} datePosted={post.date_posted} content={post.content} imageLink={post.image}/>
                 </div>
               ))}
               

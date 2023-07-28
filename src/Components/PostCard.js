@@ -1,6 +1,6 @@
 import React from "react";
 
-function PostCard({ content, author, imageLink }) {
+function PostCard({ content, author, datePosted, imageLink, authorImage  }) {
   return (
     <div className="w-full h-fit bg-white rounded-md shadow-md py-10">
       {/* Info div */}
@@ -8,7 +8,7 @@ function PostCard({ content, author, imageLink }) {
         <div className="flex gap-2 flex-1">
           <div className="avatar">
             <div className="w-11 h-11 rounded-full cursor-pointer">
-              <img src={imageLink} alt="Farmer profile" />
+              <img src={authorImage} alt="Farmer profile" />
             </div>
           </div>
           <div>
@@ -19,7 +19,7 @@ function PostCard({ content, author, imageLink }) {
               </span>
             </h3>
             <p className="font-light text-sm text-gray-400">
-              Tuesday at 9:30pm
+              {datePosted}
             </p>
           </div>
         </div>
