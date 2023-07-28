@@ -26,8 +26,8 @@ function Feed() {
           "https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/"
         ); // Replace with your API endpoint
         const data = await response.json();
-
         
+
         setPosts(data); // Update the state with the fetched posts
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -36,6 +36,7 @@ function Feed() {
 
     fetchPosts();
   }, []);
+
 
   return (
     <>
@@ -56,9 +57,12 @@ function Feed() {
                 <div key={post.id}>
                   <PostCard 
                     author={user.first_name + ' ' + user.last_name} 
+                    authorType={user.user_type == 'user'? 'farmer': 'expert'}
+                    authorImage={user.picture}
                     datePosted={post.date_posted} 
                     content={post.content} 
                     imageLink={post.image}
+                    tags={post.tags}
                   />
                 </div>
               ))}
