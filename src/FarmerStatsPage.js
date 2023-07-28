@@ -18,6 +18,7 @@ function FarmerStatsPage() {
           </div>
           {/* Feed div */}
           <div className="w-full lg:w-1/2">
+            <h1 className="py-3 text-2xl font-semibold">Stats</h1>
             {/* Write a post */}
             <FarmerStats />
           </div>
