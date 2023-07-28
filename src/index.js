@@ -10,6 +10,7 @@ import Feed from "./Feed";
 import ProfileFeed from "./ProfileFeed";
 import Login from "./Login";
 import FarmerStats from "./FarmerStatsPage";
+import Summary from "./Summary";
 import {
   BrowserRouter,
   Routes,
@@ -24,7 +25,7 @@ const isUserAuthenticated = () => {
   // Replace this with your actual authentication check, e.g., check for a valid token in local storage
   const token = localStorage.getItem("authToken");
   // return !!token; // Return true if the token is present, false otherwise
-  console.log(token)
+  console.log(token);
   return token ? true : false;
 };
 const PrivateWrapper = ({ children }) => {
@@ -43,12 +44,7 @@ root.render(
       <Routes>
         {/* Public routes */}
 
-        <Route
-          path="/login"
-          element={
-              <Login />
-          }
-        />
+        <Route path="/login" element={<Login />} />
 
         {/* Protected routes */}
         <Route
@@ -68,9 +64,24 @@ root.render(
               </PrivateWrapper>
             }
           />
+          <Route
+            path="/summary"
+            element={
+              <PrivateWrapper>
+                <Summary />
+              </PrivateWrapper>
+            }
+          />
           <Route path="/about" element={<About />} />
         </Route>
-        <Route path="/create/post" element={<PrivateWrapper><CreatePostPage /></PrivateWrapper>} />
+        <Route
+          path="/create/post"
+          element={
+            <PrivateWrapper>
+              <CreatePostPage />
+            </PrivateWrapper>
+          }
+        />
         <Route
           path="/feed"
           element={
@@ -87,7 +98,8 @@ root.render(
             </PrivateWrapper>
           }
         />
-         <Route
+
+        <Route
           path="/farmerstats"
           element={
             <PrivateWrapper>
