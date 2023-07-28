@@ -11,6 +11,7 @@ import ProfileFeed from "./ProfileFeed";
 import Login from "./Login";
 import FarmerStats from "./FarmerStatsPage";
 import Summary from "./Summary";
+import Ailments from "./Ailments";
 import {
   BrowserRouter,
   Routes,
@@ -69,6 +70,14 @@ root.render(
             element={
               <PrivateWrapper>
                 <Summary />
+              </PrivateWrapper>
+            }
+          />
+          <Route
+            path="/ailments"
+            element={
+              <PrivateWrapper>
+                <Ailments />
               </PrivateWrapper>
             }
           />

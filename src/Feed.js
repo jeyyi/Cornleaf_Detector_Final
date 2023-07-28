@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FeedNavbar from "./Components/FeedNavbar";
 import FeedSideBar from "./Components/FeedSideBar";
-import CreatePostModal from "./Components/CreatePostModal";
 import CreatePostCard from "./Components/CreatePostCard";
 import PostCard from "./Components/PostCard";
 //<<<<<<< HEAD
