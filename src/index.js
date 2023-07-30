@@ -4,6 +4,7 @@ import App from "./App";
 import Home from "./Home";
 import NotFound from "./NotFound";
 import About from "./About";
+import styles from "./index.css";
 import Navigation from "./Components/Navigation";
 import Feed from "./Feed";
 import ProfileFeed from "./ProfileFeed";
