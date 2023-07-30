@@ -27,6 +27,8 @@ export default function PostCard({postID, content, author, authorType, authorIma
     }catch(error){
       console.log(error)
     }
+    console.log(tags)
+
   }, []);
   
   const handleCreateComment = async  (e) => {
@@ -51,7 +53,6 @@ export default function PostCard({postID, content, author, authorType, authorIma
       console.log(error)
     }
 
-    
   }
   return (
     <div className="w-full h-fit bg-white rounded-md shadow-md py-10">
@@ -104,7 +105,9 @@ export default function PostCard({postID, content, author, authorType, authorIma
       ) : <div></div>}
 
       <p className="pt-5 px-5 lg:px-10 text-gray-400 text-sm">
-         {tags.length !== 0 ? (<b>tags: {tags}</b>) : <></>}
+         {tags.length !== 0 ? (<b className="flex">tags: {tags.map((tag, i) => (
+          <div key={i} className="px-1">{tag}</div>
+         ))}</b>) : <></>}
       </p>
       
       <div className="divider" />
