@@ -5,6 +5,7 @@ import CreatePostCard from "./Components/CreatePostCard";
 import PostCard from "./Components/PostCard";
 import FarmerStats from "./Components/FarmerStats";
 import CreatePost from "./Components/CreatePost";
+import axios from "axios";
 function Feed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,19 +17,21 @@ function Feed() {
   };
 
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
   useEffect(() => {
     document.title = "Feed-Cornleaf Disease Classifier";
 
     const fetchPosts = async () => {
+
       try {
-        const response = await fetch(
+        const response = await axios.get(
           "https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/"
         ); // Replace with your API endpoint
-        const data = await response.json();
 
-        setPosts(data); // Update the state with the fetched posts
+        const data = await response.data;
+        const postResult = data['results']
+        setPosts(postResult); // Update the state with the fetched posts
         setLoading(false);
+
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
@@ -58,6 +61,7 @@ function Feed() {
                 posts.map((post) => (
                   <div key={post.id}>
                     <PostCard
+                      postID={post.id}
                       author={user.first_name + " " + user.last_name}
                       authorType={
                         user.user_type === "user" ? "farmer" : "expert"

@@ -1,8 +1,58 @@
 import { image } from "@tensorflow/tfjs-core";
-import React from "react";
+import axios from "axios";
+import React, {useState, useEffect} from "react";
 
-function PostCard({ content, author, authorType, authorImage, datePosted, imageLink, tags  }) {
-  console.log(tags)
+export default function PostCard({postID, content, author, authorType, authorImage, datePosted, imageLink, tags  }) {
+  const [comment, setComment] = useState('')
+  const [commentList, setCommentList] = useState([])
+
+  useEffect(() => {
+    try{
+      const getCommentForAPost = async () => {
+        const response = await axios.get(
+          `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/comment/api3/comment/?post=${postID}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        const comments = response.data
+        const commentResults = comments['results']
+        setCommentList(commentResults)
+      }
+      getCommentForAPost();
+      console.log(commentList.length)
+
+    }catch(error){
+      console.log(error)
+    }
+  }, []);
+  
+  const handleCreateComment = async  (e) => {
+    // e.preventDefault();
+    const formData = new FormData();
+    const user = JSON.parse(localStorage.getItem("user"));
+    formData.append("content", comment);
+    formData.append("post", postID);
+    formData.append("author", user.id);
+
+    try{
+      await axios.post(
+        "https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/comment/api3/comment/",
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    }catch(error){
+      console.log(error)
+    }
+
+    
+  }
   return (
     <div className="w-full h-fit bg-white rounded-md shadow-md py-10">
       {/* Info div */}
@@ -15,7 +65,7 @@ function PostCard({ content, author, authorType, authorImage, datePosted, imageL
           </div>
           <div>
             <h3 className="font-medium">
-              {author}{" "} <b>({authorType})</b> {" "}
+              {author}{" "} {authorType} <div className="badge badge-primary ml-2 text-sm font-light">{authorType ? 'Farmer' : 'Expert'}</div> {" "}
               <span className="text-gray-400 font-normal text-sm">
                 added a post
               </span>
@@ -56,56 +106,65 @@ function PostCard({ content, author, authorType, authorImage, datePosted, imageL
       <p className="pt-5 px-5 lg:px-10 text-gray-400 text-sm">
          {tags.length !== 0 ? (<b>tags: {tags}</b>) : <></>}
       </p>
-      <p className="pt-5 px-5 lg:px-10 text-gray-400 text-sm font-light">
-        1 comment
-      </p>
+      
       <div className="divider" />
+      
+
       {/* Comment section */}
-      <div className="flex flex-col w-full gap-2">
+      {commentList.map((comment) => (
+        <div key={comment.id}>
+          <div className="flex flex-col w-full gap-2 py-2">
         <div className="px-5 lg:px-10 flex gap-2 w-full">
           <div className="avatar">
             <div className="w-11 h-11 rounded-full cursor-pointer">
-              <img src={imageLink} alt="Commentor profile" />
+              <img src={comment.author_image} alt="Commentor profile" />
             </div>
           </div>
           <div className="w-fit h-fit px-3 py-2 rounded-2xl bg-lime-300">
             <div className="flex">
               <h3 className="text-sm font-semibold text-gray-700">
-                Michael Swell
+                {comment.author_name}
               </h3>
-              <div className="badge badge-primary ml-2 text-sm font-light">Expert</div>
+              <div className="badge badge-primary ml-2 text-sm font-light">{comment.author_type}</div>
             </div>
 
             <p className="text-sm font-light text-gray-600">
-              This is an example comment to ail the disease of cornleaf
+              {comment.content}
             </p>
           </div>
         </div>
       </div>
+        </div>
+      ))}
 
       {/* Enter your comment */}
-      <div className="px-5 lg:px-10 flex gap-2 w-full pt-3">
+          <div className="px-5 lg:px-10 flex gap-2 w-full pt-3">
         <div className="avatar">
           <div className="w-11 h-11 rounded-full cursor-pointer">
             <img src={authorImage} alt="Farmer profile" />
           </div>
         </div>
-        <input
-          type="text"
-          placeholder={`Write a comment...`}
-          className="input w-full rounded-full bg-gray-100"
-        />
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="w-7 h-7 my-auto text-lime-600 cursor-pointer"
-        >
-          <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
-        </svg>
+        <form onSubmit={handleCreateComment}>
+          <input
+            type="text"
+            placeholder={`Write a comment...`}
+            className="input w-full rounded-full bg-gray-100"
+            onChange={(e) => setComment(e.target.value)}
+
+          />
+          <button type="submit">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-7 h-7 my-auto text-lime-600 cursor-pointer"
+            >
+              <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+            </svg>
+          </button>
+        </form>
       </div>
+       
     </div>
   );
 }
-
-export default PostCard;

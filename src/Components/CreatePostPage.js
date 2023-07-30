@@ -34,7 +34,6 @@ export default function CreatePostPage() {
   const handleCreatePost = async (e) => {
     e.preventDefault();
     try {
-      console.log(e);
       const formData = new FormData();
       formData.append("content", content);
       formData.append("image", pictures);
@@ -55,7 +54,6 @@ export default function CreatePostPage() {
         }
       );
 
-      console.log(response);
       if (response.status === 201) {
         if (typeof window !== "undefined") {
           /* Redirect */

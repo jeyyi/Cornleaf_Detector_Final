@@ -28,8 +28,6 @@ function Login() {
       );
       const user_token = response.data["access"]
       const user_id = jwt(user_token)['user_id']
-      console.log(user_id)
-      console.log(user_token)
       const user_response = await axios.get(
         `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/auth/users/${user_id}`,
         {
@@ -38,7 +36,6 @@ function Login() {
           },
         }
       );
-      console.log(user_response.data)
       if (response.status === 200) {
         if (typeof window !== "undefined") {
           localStorage.setItem("authToken", response.data["access"]);
