@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import Home from "./Home";
 import NotFound from "./NotFound";
-import styles from "./index.css";
 import About from "./About";
 import Navigation from "./Components/Navigation";
 import Feed from "./Feed";
