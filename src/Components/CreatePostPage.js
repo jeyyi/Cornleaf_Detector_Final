@@ -112,7 +112,7 @@ export default function CreatePostPage() {
                     {user.first_name} {user.last_name}
                   </h3>
                   <h5 className="bg-green-300 p-1 flex justify-center rounded-full text-sm font-light">
-                    {user.user_type == 'user' ? 'Farmer': 'Expert'}
+                    {user.user_type === 'user' ? 'Farmer': 'Expert'}
                   </h5>
                 </div>
               </div>

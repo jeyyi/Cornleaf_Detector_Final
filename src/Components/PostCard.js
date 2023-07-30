@@ -1,4 +1,3 @@
-import { image } from "@tensorflow/tfjs-core";
 import axios from "axios";
 import React, {useState, useEffect} from "react";
 

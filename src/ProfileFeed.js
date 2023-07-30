@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FeedNavbar from "./Components/FeedNavbar";
 import FeedSideBar from "./Components/FeedSideBar";
-import CreatePostCard from "./Components/CreatePostCard";
 import CreatePost from "./Components/CreatePost";
 import PostCard from "./Components/PostCard";
 import FarmerStats from "./Components/FarmerStats";
@@ -11,12 +10,6 @@ function ProfileFeed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem("user"));
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    // Do something with the selected file
-    console.log("Selected file:", file);
-  };
 
   useEffect(() => {
     document.title = "Farmer Lastname - Feed";
@@ -62,6 +55,7 @@ function ProfileFeed() {
               <div className="avatar lg:w-40 lg:h-40 w-24 h-24 -mt-10 online z-0">
                 <div className="rounded-full">
                   <img
+                  alt='no image'
                     src={user.picture}
                   />
                 </div>
@@ -71,7 +65,7 @@ function ProfileFeed() {
                   {user.first_name} {user.last_name}
                 </h3>
                 <h5 className="pl-3 text-base lg:text-lg text-gray-500">
-                  {user.user_type == 'user' ? 'Farmer': 'Expert'}
+                  {user.user_type === 'user' ? 'Farmer': 'Expert'}
                 </h5>
               </div>
             </div>

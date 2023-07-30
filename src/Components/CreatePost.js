@@ -1,5 +1,4 @@
 import React from "react";
-import CreatePostCard from "./CreatePostCard";
 
 export default function CreatePost({user}) {
   const handleClick = () => {

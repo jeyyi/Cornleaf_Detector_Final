@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import Home from "./Home";
 import NotFound from "./NotFound";
-import styles from "./index.css";
 import About from "./About";
 import Navigation from "./Components/Navigation";
 import Feed from "./Feed";
@@ -16,10 +15,8 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Outlet,
   Navigate,
 } from "react-router-dom";
-import PrivateRoute from "./Components/ProtectedRoutes";
 import CreatePostPage from "./Components/CreatePostPage";
 
 const isUserAuthenticated = () => {
@@ -33,9 +30,6 @@ const PrivateWrapper = ({ children }) => {
   return isUserAuthenticated() ? children : <Navigate to="/login" />;
 };
 
-const LoginWrapper = () => {
-  return isUserAuthenticated() ? <Home /> : <Navigate to="/" replace />;
-};
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
