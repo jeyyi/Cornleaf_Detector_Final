@@ -51,7 +51,7 @@ function Feed() {
           {/* Feed div */}
           <div className="w-full lg:w-1/2">
             {/* Write a post */}
-            <CreatePost />
+            <CreatePost user={user}/>
 
             {/* Start posts */}
             <div className="pt-5 flex flex-col gap-3">

@@ -9,25 +9,23 @@ export default function PostCard({postID, content, author, authorType, authorIma
   useEffect(() => {
     try{
       const getCommentForAPost = async () => {
-        const response = await axios.get(
-          `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/comment/api3/comment/?post=${postID}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        const comments = response.data
-        const commentResults = comments['results']
-        setCommentList(commentResults)
+      const response = await axios.get(
+        `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/comment/api3/comment/?post=${postID}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+       const comments = response.data
+      const commentResults = comments['results']
+      setCommentList(commentResults)
       }
       getCommentForAPost();
-      console.log(commentList.length)
 
     }catch(error){
       console.log(error)
     }
-    console.log(tags)
 
   }, []);
   
@@ -66,7 +64,7 @@ export default function PostCard({postID, content, author, authorType, authorIma
           </div>
           <div>
             <h3 className="font-medium">
-              {author}{" "} {authorType} <div className="badge badge-primary ml-2 text-sm font-light">{authorType ? 'Farmer' : 'Expert'}</div> {" "}
+              {author} <div className="badge badge-primary ml-2 text-sm font-light">{authorType ? 'Farmer' : 'Expert'}</div> {" "}
               <span className="text-gray-400 font-normal text-sm">
                 added a post
               </span>
@@ -104,11 +102,11 @@ export default function PostCard({postID, content, author, authorType, authorIma
       </div>
       ) : <div></div>}
 
-      <p className="pt-5 px-5 lg:px-10 text-gray-400 text-sm">
+      <div className="pt-5 px-5 lg:px-10 text-gray-400 text-sm">
          {tags.length !== 0 ? (<b className="flex">tags: {tags.map((tag, i) => (
           <div key={i} className="px-1">{tag}</div>
          ))}</b>) : <></>}
-      </p>
+      </div>
       
       <div className="divider" />
       
@@ -141,7 +139,7 @@ export default function PostCard({postID, content, author, authorType, authorIma
       ))}
 
       {/* Enter your comment */}
-          <div className="px-5 lg:px-10 flex gap-2 w-full pt-3">
+        <div className="px-5 lg:px-10 flex gap-2 w-full pt-3">
         <div className="avatar">
           <div className="w-11 h-11 rounded-full cursor-pointer">
             <img src={authorImage} alt="Farmer profile" />
@@ -166,7 +164,7 @@ export default function PostCard({postID, content, author, authorType, authorIma
             </svg>
           </button>
         </form>
-      </div>
+        </div>
        
     </div>
   );

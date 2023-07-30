@@ -40,7 +40,7 @@ const LoginWrapper = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <Routes>
         {/* Public routes */}
@@ -123,5 +123,5 @@ root.render(
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

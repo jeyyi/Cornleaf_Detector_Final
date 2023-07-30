@@ -1,18 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FeedNavbar from "./Components/FeedNavbar";
 import FeedSideBar from "./Components/FeedSideBar";
 import CreatePostCard from "./Components/CreatePostCard";
 import CreatePost from "./Components/CreatePost";
 import PostCard from "./Components/PostCard";
 import FarmerStats from "./Components/FarmerStats";
+import axios from "axios";
+
 function ProfileFeed() {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     // Do something with the selected file
     console.log("Selected file:", file);
   };
+
   useEffect(() => {
     document.title = "Farmer Lastname - Feed";
+    const fetchPosts = async () => {
+      try {
+        const response = await axios.get(
+          `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/?author=${user.id}`
+        ); // Replace with your API endpoint
+
+        const data = await response.data;
+        const postResult = data['results']
+        setPosts(postResult); // Update the state with the fetched posts
+        setLoading(false);
+
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchPosts();
   }, []);
   return (
     <>
@@ -38,26 +62,25 @@ function ProfileFeed() {
               <div className="avatar lg:w-40 lg:h-40 w-24 h-24 -mt-10 online z-0">
                 <div className="rounded-full">
                   <img
-                    src="https://media.licdn.com/dms/image/C4E12AQGJMHJYg2NzWg/article-cover_image-shrink_720_1280/0/1546512971231?e=2147483647&v=beta&t=8JEuNbLs3TuGKrF5xGCCaAb5ZbXYuLBdel0CNCTlBX4"
-                    alt="Profile"
+                    src={user.picture}
                   />
                 </div>
               </div>
               <div className="flex flex-col">
                 <h3 className="lg:text-3xl text-xl font-semibold pt-3 pl-3">
-                  Juan Dela Cruz
+                  {user.first_name} {user.last_name}
                 </h3>
                 <h5 className="pl-3 text-base lg:text-lg text-gray-500">
-                  Farmer
+                  {user.user_type == 'user' ? 'Farmer': 'Expert'}
                 </h5>
               </div>
             </div>
             {/* Posts feed */}
             <div className="pt-3">
-              <CreatePost />
+              <CreatePost user={user}/>
               <div className="w-full rounded-lg shadow-md mt-2 flex">
                 <h3 className="text-xl font-semibold px-5 py-3 flex-1">
-                  6 Total Posts
+                  3 latest posts
                 </h3>
                 <div className="flex items-center pr-3 text-lg text-lime-700 font-light">
                   <svg
@@ -78,7 +101,26 @@ function ProfileFeed() {
               {/* Posts go here */}
               <div className="flex flex-col pt-3 gap-2">
               {/*   <PostCard /> */}
-            
+              {loading ? (
+                <span className="loading loading-spinner loading-md mx-auto"></span>
+              ) : (
+                posts.map((post) => (
+                  <div key={post.id}>
+                    <PostCard
+                      postID={post.id}
+                      author={user.first_name + " " + user.last_name}
+                      authorType={
+                        user.user_type === "user" ? "farmer" : "expert"
+                      }
+                      authorImage={user.picture}
+                      datePosted={post.date_posted}
+                      content={post.content}
+                      imageLink={post.image}
+                      tags={post.tags}
+                    />
+                  </div>
+                ))
+              )}
               </div>
             </div>
           </div>

@@ -111,8 +111,8 @@ export default function CreatePostPage() {
                   <h3 className="font-medium text-gray-700">
                     {user.first_name} {user.last_name}
                   </h3>
-                  <h5 className="bg-gray-300 p-1 flex justify-center rounded-full text-sm font-light">
-                    {user.user_type}
+                  <h5 className="bg-green-300 p-1 flex justify-center rounded-full text-sm font-light">
+                    {user.user_type == 'user' ? 'Farmer': 'Expert'}
                   </h5>
                 </div>
               </div>
