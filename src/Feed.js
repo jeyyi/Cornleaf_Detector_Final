@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FeedNavbar from "./Components/FeedNavbar";
 import FeedSideBar from "./Components/FeedSideBar";
-import CreatePostCard from "./Components/CreatePostCard";
 import PostCard from "./Components/PostCard";
 import FarmerStats from "./Components/FarmerStats";
 import CreatePost from "./Components/CreatePost";
@@ -9,12 +8,6 @@ import axios from "axios";
 function Feed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    // Do something with the selected file
-    console.log("Selected file:", file);
-  };
 
   const user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
@@ -62,11 +55,11 @@ function Feed() {
                   <div key={post.id}>
                     <PostCard
                       postID={post.id}
-                      author={user.first_name + " " + user.last_name}
+                      author={post.author_name}
                       authorType={
-                        user.user_type === "user" ? "farmer" : "expert"
+                        post.user_type === "user" ? "farmer" : "expert"
                       }
-                      authorImage={user.picture}
+                      authorImage={post.image}
                       datePosted={post.date_posted}
                       content={post.content}
                       imageLink={post.image}
@@ -77,7 +70,7 @@ function Feed() {
               )}
             </div>
           </div>
-          {user.user_type == "user" ? (
+          {user.user_type === "user" ? (
             <div className="px-5 hidden lg:flex flex-1 sticky top-28 right-0 h-fit">
               <FarmerStats />
             </div>

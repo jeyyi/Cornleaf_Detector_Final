@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import FeedNavbar from "./Components/FeedNavbar";
 import FeedSideBar from "./Components/FeedSideBar";
 import FarmerStats from "./Components/FarmerStats";
-import axios from "axios";
 
 function FarmerStatsPage() {
-  const [classifications, setClassifications] = useState({})
   useEffect(() => {
   console.log('fmer stats page')
 

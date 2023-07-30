@@ -16,10 +16,8 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Outlet,
   Navigate,
 } from "react-router-dom";
-import PrivateRoute from "./Components/ProtectedRoutes";
 import CreatePostPage from "./Components/CreatePostPage";
 
 const isUserAuthenticated = () => {
@@ -33,9 +31,6 @@ const PrivateWrapper = ({ children }) => {
   return isUserAuthenticated() ? children : <Navigate to="/login" />;
 };
 
-const LoginWrapper = () => {
-  return isUserAuthenticated() ? <Home /> : <Navigate to="/" replace />;
-};
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

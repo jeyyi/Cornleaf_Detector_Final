@@ -7,7 +7,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
 } from "recharts";
 import "react-datepicker/dist/react-datepicker.css";
 import { Pie } from "react-chartjs-2";
