@@ -64,6 +64,7 @@ function Feed() {
                       content={post.content}
                       imageLink={post.image}
                       tags={post.tags}
+                      user = {user}
                     />
                   </div>
                 ))

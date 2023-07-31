@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, {useState, useEffect} from "react";
 
-export default function PostCard({postID, content, author, authorType, authorImage, datePosted, imageLink, tags  }) {
+export default function PostCard({postID, content, author, authorType, authorImage, datePosted, imageLink, tags, user  }) {
   const [comment, setComment] = useState('')
   const [commentList, setCommentList] = useState([])
 
@@ -141,7 +141,7 @@ export default function PostCard({postID, content, author, authorType, authorIma
         <div className="px-5 lg:px-10 flex gap-2 w-full pt-3">
         <div className="avatar">
           <div className="w-11 h-11 rounded-full cursor-pointer">
-            <img src={authorImage} alt="Farmer profile" />
+            <img src={user.picture} alt="Farmer profile" />
           </div>
         </div>
         <form onSubmit={handleCreateComment} className="flex justify-between w-full gap-3">
