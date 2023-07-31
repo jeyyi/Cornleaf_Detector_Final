@@ -16,7 +16,7 @@ function Feed() {
   };
 
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+  //console.log(user);
   useEffect(() => {
     document.title = "Feed-Cornleaf Disease Classifier";
 
@@ -29,6 +29,7 @@ function Feed() {
 
         setPosts(data); // Update the state with the fetched posts
         setLoading(false);
+        console.log(posts)
       } catch (error) {
         console.error("Error fetching posts:", error);
       }

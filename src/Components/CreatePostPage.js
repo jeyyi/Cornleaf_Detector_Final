@@ -3,7 +3,7 @@ import FeedNavbar from "./FeedNavbar";
 import axios from "axios";
 import FeedSideBar from "./FeedSideBar";
 
-export default function CreatePostPage() {
+export default function CreatePostPage(props) {
   // const [author, setAuthor] = useState('');
   const [content, setContent] = useState("");
   const [pictures, setPictures] = useState("");
