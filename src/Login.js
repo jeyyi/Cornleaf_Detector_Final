@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Logo from "./Assets/Logo.png";
-import { Navigate } from "react-router-dom";
 import axios from "axios";
 import jwt from "jwt-decode";
 
 function Login() {
   // Set the new title when the component mounts
   const [email, setEmail] = useState("");
-  const [loginText, setLoginText] = useState("Login");
+  // const [loginText, setLoginText] = useState("Login");
   const [password, setPassword] = useState("");
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,8 +27,6 @@ function Login() {
       );
       const user_token = response.data["access"]
       const user_id = jwt(user_token)['user_id']
-      console.log(user_id)
-      console.log(user_token)
       const user_response = await axios.get(
         `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/auth/users/${user_id}`,
         {
@@ -38,7 +35,6 @@ function Login() {
           },
         }
       );
-      console.log(user_response.data)
       if (response.status === 200) {
         if (typeof window !== "undefined") {
           localStorage.setItem("authToken", response.data["access"]);
@@ -95,7 +91,7 @@ function Login() {
               Invalid username or password
             </h3>
             <button id="loginBtn" className="btn w-full max-w-xs bg-green-400">
-              {loginText}
+              Login
             </button>
           </form>
         </div>

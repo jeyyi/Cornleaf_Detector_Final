@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import {
   BarChart,
@@ -7,34 +7,99 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
 } from "recharts";
 import "react-datepicker/dist/react-datepicker.css";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
+import axios from "axios";
 
 function FarmerStats() {
   /* Sample Data */
+  const [healthy, setHealthy] = useState(0)
+  const [blight, setBlight] = useState(0)
+  const [rust, setRust] = useState(0)
+  const [graySpot, setGraySpot] = useState(0)
+  const [other, setOther] = useState(0)
+  const [dailyHealthy, setDailyHealthy] = useState(0)
+  const [dailyBlight, setDailyBlight] = useState(0)
+  const [dailyRust, setDailyRust] = useState(0)
+  const [dailyGraySpot, setDailyGraySpot] = useState(0)
+  const [dailyOther, setDailyOther] = useState(0)
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const axiosInstance = axios.create({
+    baseURL: 'https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/', // Replace with your API base URL
+    timeout: 5000, // Set a reasonable timeout value (in milliseconds)
+  });
+
+  useEffect(() => {
+    console.log('farmerstats is called')
+
+    const fetchStats = async () => {
+
+      try {
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        const response = await axiosInstance.get(
+          `stats/total-stats/${user.id}/`
+        ); // Replace with your API endpoint
+
+        const data = await response.data;
+        setHealthy(data['healthy_count'])
+        setBlight(data['blight_count'])
+        setRust(data['rust_count'])
+        setGraySpot(data['gray_leaf_spot_count'])
+        setOther(data['other_count'])
+
+
+        const dateString = selectedDate;
+        const dateObj = new Date(dateString);
+        const year = dateObj.getFullYear();
+        const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+        const day = dateObj.getDate().toString().padStart(2, '0');
+
+        const formattedDate = `${year}-${month}-${day}`;
+        const dailyResponse = await axiosInstance.get(
+          `stats/daily-stats/${user.id}/${formattedDate}/`
+        );
+        const dailyData = await dailyResponse.data;
+        setDailyHealthy(dailyData['healthy_count'])
+        setDailyBlight(dailyData['blight_count'])
+        setDailyRust(dailyData['rust_count'])
+        setDailyGraySpot(dailyData['gray_leaf_spot_count'])
+        setDailyOther(dailyData['other_count'])
+      } catch (error) {
+        console.error("Error fetching stats:", error.response.data);
+      }
+    };
+    fetchStats();
+    
+  }, [selectedDate]);
+
+
+
+
   const data = [
-    { name: "Healthy", value: 28 },
-    { name: "Blight", value: 12 },
-    { name: "Rust", value: 6 },
-    { name: "Gray Spot", value: 10 },
+    { name: "Healthy", value: dailyHealthy },
+    { name: "Blight", value: dailyBlight },
+    { name: "Rust", value: dailyRust },
+    { name: "Gray Spot", value: dailyGraySpot},
+    { name: "Other", value: dailyOther},
   ];
   const chartdata = {
-    labels: ["Blight", "Gray Leaf Spot", "Rust","Healthy"],
+    labels: ["Blight", "Gray Leaf Spot", "Rust","Healthy", "Other"],
     datasets: [
       {
-        data: [90, 42, 32,128],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56","#55eb34"],
-        hoverBackgroundColor: ["#fa4b71", "#2799e6", "#fcbd1c","#2ba611"],
+        data: [blight, graySpot, rust, healthy, other],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56","#55eb34", "#27eb55"],
+        hoverBackgroundColor: ["#fa4b71", "#2799e6", "#fcbd1c","#2ba611", "#2ba611"],
       },
     ],
   };
 
-  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDateChange = (date) => {
+    
     setSelectedDate(date);
   };
   const formatDate = (date) => {

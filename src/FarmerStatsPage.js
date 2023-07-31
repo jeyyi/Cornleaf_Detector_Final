@@ -5,9 +5,33 @@ import FarmerStats from "./Components/FarmerStats";
 
 function FarmerStatsPage() {
   useEffect(() => {
+  console.log('fmer stats page')
+
     /* Change farmer to name */
     document.title = "Stats - Farmer";
-  });
+    // const fetchDailyStats = async (e) => {
+
+    //   try {
+    //     const user = JSON.parse(localStorage.getItem("user"));
+
+    //     const response = await axios.get(
+    //       `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/stats/total-stats/${user.id}/`
+    //     ); // Replace with your API endpoint
+
+    //     const data = await response.data;
+    //     setClassifications(data)
+    //     // setPosts(data); // Update the state with the fetched posts
+    //     // setLoading(false);
+    //   } catch (error) {
+    //     console.error("Error fetching posts:", error);
+    //   }
+    // };
+
+
+    
+
+    // fetchDailyStats();
+  }, []);
   return (
     <>
       <div className="min-h-screen bg-base-100">

@@ -34,7 +34,6 @@ export default function CreatePostPage(props) {
   const handleCreatePost = async (e) => {
     e.preventDefault();
     try {
-      console.log(e);
       const formData = new FormData();
       formData.append("content", content);
       formData.append("image", pictures);
@@ -55,7 +54,6 @@ export default function CreatePostPage(props) {
         }
       );
 
-      console.log(response);
       if (response.status === 201) {
         if (typeof window !== "undefined") {
           /* Redirect */
@@ -113,8 +111,8 @@ export default function CreatePostPage(props) {
                   <h3 className="font-medium text-gray-700">
                     {user.first_name} {user.last_name}
                   </h3>
-                  <h5 className="bg-gray-300 p-1 flex justify-center rounded-full text-sm font-light">
-                    {user.user_type}
+                  <h5 className="bg-green-300 p-1 flex justify-center rounded-full text-sm font-light">
+                    {user.user_type === 'user' ? 'Farmer': 'Expert'}
                   </h5>
                 </div>
               </div>

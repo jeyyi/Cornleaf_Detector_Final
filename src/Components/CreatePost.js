@@ -1,7 +1,6 @@
 import React from "react";
-import CreatePostCard from "./CreatePostCard";
 
-export default function CreatePost() {
+export default function CreatePost({user}) {
   const handleClick = () => {
     // Redirect to the specified page
     window.location = "/create/post";
@@ -20,7 +19,7 @@ export default function CreatePost() {
         <div className="avatar">
           <div className="w-11 h-11 rounded-full cursor-pointer">
             <img
-              src="https://media.licdn.com/dms/image/C4E12AQGJMHJYg2NzWg/article-cover_image-shrink_720_1280/0/1546512971231?e=2147483647&v=beta&t=8JEuNbLs3TuGKrF5xGCCaAb5ZbXYuLBdel0CNCTlBX4"
+              src={user.picture}
               alt="Farmer profile"
             />
           </div>
