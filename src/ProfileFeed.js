@@ -10,6 +10,7 @@ function ProfileFeed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user)
 
   useEffect(() => {
     document.title = "Farmer Lastname - Feed";
@@ -111,6 +112,7 @@ function ProfileFeed() {
                       content={post.content}
                       imageLink={post.image}
                       tags={post.tags}
+                      user = {user}
                     />
                   </div>
                 ))

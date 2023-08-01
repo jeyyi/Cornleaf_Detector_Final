@@ -91,8 +91,8 @@ function FarmerStats() {
     datasets: [
       {
         data: [blight, graySpot, rust, healthy, other],
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56","#55eb34", "#27eb55"],
-        hoverBackgroundColor: ["#fa4b71", "#2799e6", "#fcbd1c","#2ba611", "#2ba611"],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56","#55eb34", "#7F00FF"],
+        hoverBackgroundColor: ["#fa4b71", "#2799e6", "#fcbd1c","#2ba611", "#7F00FF"],
       },
     ],
   };

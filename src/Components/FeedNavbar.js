@@ -5,6 +5,7 @@ function FeedNavbar() {
     localStorage.removeItem("authToken");
     window.location.href = "/login";
   };
+  const user = JSON.parse(localStorage.getItem('user'))
   return (
     <div className="border-b-2 bg-lime-600 flex flex-row w-full px-5 lg:px-10 py-4 sticky top-0 z-10">
       <div className="justify-between w-full flex flex-row">
@@ -99,7 +100,7 @@ function FeedNavbar() {
             <div className="w-10 h-10 rounded-full">
               <label tabIndex={0} className="cursor-pointer">
                 <img
-                  src="https://media.licdn.com/dms/image/C4E12AQGJMHJYg2NzWg/article-cover_image-shrink_720_1280/0/1546512971231?e=2147483647&v=beta&t=8JEuNbLs3TuGKrF5xGCCaAb5ZbXYuLBdel0CNCTlBX4"
+                  src={user.picture}
                   alt="Farmer profile"
                 />
               </label>
