@@ -65,6 +65,7 @@ function App() {
           const predictedClassIndex = tf.argMax(prediction).dataSync()[0];
           const result = labels[predictedClassIndex];
           setPrediction(result);
+          
           const closebutton = document.getElementById("closeButton");
           closebutton.click();
         };

@@ -12,6 +12,7 @@ import Login from "./Login";
 import FarmerStats from "./FarmerStatsPage";
 import Summary from "./Summary";
 import Ailments from "./Ailments";
+import ExpertStatsPage from "./ExpertStatsPage";
 import {
   BrowserRouter,
   Routes,
@@ -108,6 +109,14 @@ root.render(
           element={
             <PrivateWrapper>
               <FarmerStats />
+            </PrivateWrapper>
+          }
+        />
+         <Route
+          path="/expertstats"
+          element={
+            <PrivateWrapper>
+              <ExpertStatsPage />
             </PrivateWrapper>
           }
         />
