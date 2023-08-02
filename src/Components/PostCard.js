@@ -1,24 +1,14 @@
 import axios from "axios";
 import React, {useState, useEffect} from "react";
 
-export default function PostCard({postID, content, author, authorType, authorImage, datePosted, imageLink, tags, user  }) {
+export default function PostCard({postID, content, author, authorType, authorImage, datePosted, imageLink, tags, user, comments  }) {
   const [comment, setComment] = useState('')
   const [commentList, setCommentList] = useState([])
 
   useEffect(() => {
     try{
       const getCommentForAPost = async () => {
-      const response = await axios.get(
-        `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/comment/api3/comment/?post=${postID}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-       const comments = response.data
-      const commentResults = comments['results']
-      setCommentList(commentResults)
+        setCommentList(comments)
       }
       getCommentForAPost();
 
@@ -63,7 +53,7 @@ export default function PostCard({postID, content, author, authorType, authorIma
           </div>
           <div>
             <h3 className="font-medium">
-              {author} <div className="badge badge-primary ml-2 text-sm font-light">{authorType ? 'Farmer' : 'Expert'}</div> {" "}
+              {author}<div className="badge badge-primary ml-2 text-sm font-light">{authorType}</div> {" "}
               <span className="text-gray-400 font-normal text-sm">
                 added a post
               </span>
