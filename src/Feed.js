@@ -5,25 +5,26 @@ import PostCard from "./Components/PostCard";
 import FarmerStats from "./Components/FarmerStats";
 import CreatePost from "./Components/CreatePost";
 import axios from "axios";
+
+
 function Feed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const user = JSON.parse(localStorage.getItem("user"));
-
+  const API_BASE_URL = 'https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev'
+  
   useEffect(() => {
     document.title = "Feed-Cornleaf Disease Classifier";
 
     const fetchPosts = async () => {
 
       try {
-        const response = await axios.get(
-          "https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/"
-        ); // Replace with your API endpoint
-
-        const data = await response.data;
-        const postResult = data['results']
-        setPosts(postResult); // Update the state with the fetched posts
+        const postsResponse  = await axios.get(`${API_BASE_URL}/post/api2/posts/`); 
+        const postsResponseResults = await postsResponse.data['results'];
+        console.log(postsResponseResults)
+        
+        setPosts(postsResponseResults); // Update the state with the fetched posts
         setLoading(false);
       } catch (error) {
         console.error("Error fetching posts:", error);
@@ -57,14 +58,15 @@ function Feed() {
                       postID={post.id}
                       author={post.author_name}
                       authorType={
-                        post.user_type
+                        post.author_type === "farmer" ? "Farmer" : "Expert"
                       }
-                      authorImage={post.image}
+                      authorImage={post.author_image}
                       datePosted={post.date_posted}
                       content={post.content}
                       imageLink={post.image}
                       tags={post.tags}
                       user = {user}
+                      comments={post.comments}
                     />
                   </div>
                 ))

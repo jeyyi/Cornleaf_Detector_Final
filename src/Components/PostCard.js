@@ -1,35 +1,25 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
-export default function PostCard({
-  postID,
-  content,
-  author,
-  authorType,
-  authorImage,
-  datePosted,
-  imageLink,
-  tags,
-  user,
-}) {
-  const [comment, setComment] = useState("");
-  const [commentList, setCommentList] = useState([]);
+export default function PostCard({postID, content, author, authorType, authorImage, datePosted, imageLink, tags, user  }) {
+  const [comment, setComment] = useState('')
+  const [commentList, setCommentList] = useState([])
 
   useEffect(() => {
     try {
       const getCommentForAPost = async () => {
-        const response = await axios.get(
-          `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/comment/api3/comment/?post=${postID}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const comments = response.data;
-        const commentResults = comments["results"];
-        setCommentList(commentResults);
-      };
+      const response = await axios.get(
+        `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/comment/api3/comment/?post=${postID}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+       const comments = response.data
+      const commentResults = comments['results']
+      setCommentList(commentResults)
+      }
       getCommentForAPost();
     } catch (error) {
       console.log(error);
@@ -70,11 +60,7 @@ export default function PostCard({
           </div>
           <div>
             <h3 className="font-medium">
-              {author}{" "}
-              <div className="badge badge-primary ml-2 text-sm font-light">
-                {authorType === "user" ? "Farmer" : "Expert"}
-                {console.log(authorType)}
-              </div>{" "}
+              {author} <div className="badge badge-primary ml-2 text-sm font-light">{authorType ? 'Farmer' : 'Expert'}</div> {" "}
               <span className="text-gray-400 font-normal text-sm">
                 added a post
               </span>
