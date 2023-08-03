@@ -57,7 +57,7 @@ function Feed() {
                       postID={post.id}
                       author={post.author_name}
                       authorType={
-                        post.user_type === "user" ? "farmer" : "expert"
+                        post.user_type
                       }
                       authorImage={post.image}
                       datePosted={post.date_posted}

@@ -55,6 +55,7 @@ export default function CreatePostPage(props) {
       );
 
       if (response.status === 201) {
+        console.log("here")
         if (typeof window !== "undefined") {
           /* Redirect */
           window.my_modal_1.showModal();
@@ -63,6 +64,7 @@ export default function CreatePostPage(props) {
           }, 2000);
         }
       } else {
+        
         alert("Wrong payload");
       }
     } catch (error) {

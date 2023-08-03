@@ -9,7 +9,7 @@ function App() {
   const [model, setModel] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [modelName, setModelName] = useState("Inception");
-
+ 
   useEffect(() => {
     async function loadModel() {
       try {
@@ -52,7 +52,7 @@ function App() {
     if (imageFile) {
       const imageElement = document.createElement("img");
       const reader = new FileReader();
-
+      
       reader.onloadend = () => {
         window.my_modal_5.showModal();
         imageElement.src = reader.result;
