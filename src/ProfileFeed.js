@@ -10,7 +10,6 @@ function ProfileFeed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user)
 
   useEffect(() => {
     document.title = "Farmer Lastname - Feed";
@@ -21,7 +20,8 @@ function ProfileFeed() {
         ); // Replace with your API endpoint
 
         const data = await response.data;
-        const postResult = data['results']
+        const postResult = data['results'].slice(0,4)
+        console.log(postResult)
         setPosts(postResult); // Update the state with the fetched posts
         setLoading(false);
 
@@ -103,16 +103,17 @@ function ProfileFeed() {
                   <div key={post.id}>
                     <PostCard
                       postID={post.id}
-                      author={user.first_name + " " + user.last_name}
+                      author={post.author_name}
                       authorType={
-                        user.user_type === "user" ? "farmer" : "expert"
+                        post.author_type
                       }
-                      authorImage={user.picture}
+                      authorImage={post.author_image}
                       datePosted={post.date_posted}
                       content={post.content}
                       imageLink={post.image}
                       tags={post.tags}
                       user = {user}
+                      comments={post.comments}
                     />
                   </div>
                 ))

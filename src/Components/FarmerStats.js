@@ -41,7 +41,7 @@ function FarmerStats() {
         const user = JSON.parse(localStorage.getItem("user"));
 
         const response = await axiosInstance.get(
-          `stats/total-stats/${user.id}/`
+          `stats/farmer-total-stats/${user.id}/`
         ); // Replace with your API endpoint
 
         const data = await response.data;
@@ -60,7 +60,7 @@ function FarmerStats() {
 
         const formattedDate = `${year}-${month}-${day}`;
         const dailyResponse = await axiosInstance.get(
-          `stats/daily-stats/${user.id}/${formattedDate}/`
+          `stats/farmer-daily-stats/${user.id}/${formattedDate}/`
         );
         const dailyData = await dailyResponse.data;
         setDailyHealthy(dailyData['healthy_count'])
