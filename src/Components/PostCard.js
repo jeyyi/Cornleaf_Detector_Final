@@ -28,7 +28,7 @@ export default function PostCard({postID, content, author, authorType, authorIma
 
     try{
       await axios.post(
-        "https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/comment/api3/comment/",
+        "https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev/comment/api3/comment/",
         formData,
         {
           headers: {

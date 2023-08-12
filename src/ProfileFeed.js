@@ -16,7 +16,7 @@ function ProfileFeed() {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/?author=${user.id}`
+          `https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/?author=${user.id}`
         ); // Replace with your API endpoint
 
         const data = await response.data;

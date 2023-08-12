@@ -15,7 +15,7 @@ function FarmerStatsPage() {
     //     const user = JSON.parse(localStorage.getItem("user"));
 
     //     const response = await axios.get(
-    //       `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/stats/total-stats/${user.id}/`
+    //       `https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev/stats/total-stats/${user.id}/`
     //     ); // Replace with your API endpoint
 
     //     const data = await response.data;

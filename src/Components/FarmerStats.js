@@ -28,7 +28,7 @@ function FarmerStats() {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const axiosInstance = axios.create({
-    baseURL: 'https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/', // Replace with your API base URL
+    baseURL: 'https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev/', // Replace with your API base URL
     timeout: 5000, // Set a reasonable timeout value (in milliseconds)
   });
 

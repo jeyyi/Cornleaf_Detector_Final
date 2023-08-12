@@ -45,7 +45,7 @@ export default function CreatePostPage(props) {
       formData.append("other", other);
 
       const response = await axios.post(
-        "https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/",
+        "https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/",
         formData,
         {
           headers: {
