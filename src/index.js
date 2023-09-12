@@ -13,6 +13,7 @@ import FarmerStats from "./FarmerStatsPage";
 import Summary from "./Summary";
 import Ailments from "./Ailments";
 import ExpertStatsPage from "./ExpertStatsPage";
+import TestGetImage from "./TestGetImage";
 import {
   BrowserRouter,
   Routes,
@@ -120,10 +121,12 @@ root.render(
             </PrivateWrapper>
           }
         />
+
         {/* Add other protected routes here */}
         {/* </Route> */}
 
         {/* Not Found route */}
+        <Route path = "/test" element={<TestGetImage/>}/>
         <Route path="/*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

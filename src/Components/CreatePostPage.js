@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import FeedNavbar from "./FeedNavbar";
 import axios from "axios";
 import FeedSideBar from "./FeedSideBar";
 
 export default function CreatePostPage(props) {
   // const [author, setAuthor] = useState('');
+  const location = useLocation();
   const [content, setContent] = useState("");
   const [pictures, setPictures] = useState("");
   const [blight, setBlight] = useState(false);
@@ -24,6 +26,7 @@ export default function CreatePostPage(props) {
     }
   };
   useEffect(() => {
+    console.log(location);
     document.title = "Create Post";
   }, []);
   const handleDeletePhoto = (event) => {

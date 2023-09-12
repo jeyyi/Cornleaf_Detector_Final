@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
+import CreatePostPage from "./Components/CreatePostPage";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   const labels = ["Blight", "Common Rust", "Gray Leaf Spot", "Healthy"];
@@ -9,7 +11,7 @@ function App() {
   const [model, setModel] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [modelName, setModelName] = useState("Inception");
- 
+
   useEffect(() => {
     async function loadModel() {
       try {
@@ -52,7 +54,7 @@ function App() {
     if (imageFile) {
       const imageElement = document.createElement("img");
       const reader = new FileReader();
-      
+
       reader.onloadend = () => {
         window.my_modal_5.showModal();
         imageElement.src = reader.result;
@@ -65,7 +67,7 @@ function App() {
           const predictedClassIndex = tf.argMax(prediction).dataSync()[0];
           const result = labels[predictedClassIndex];
           setPrediction(result);
-          
+
           const closebutton = document.getElementById("closeButton");
           closebutton.click();
         };
@@ -161,8 +163,15 @@ function App() {
             Prediction:
             <span className="font-bold text-2xl">{" " + prediction}</span>
           </p>
-
-          <div className="tooltip ml-2 cursor-pointer" data-tip="Share">
+          {/* Share button */}
+          <Link
+            className="tooltip ml-2 cursor-pointer"
+            data-tip="Share"
+            to={{
+              pathname: "../create/post",
+              state: { picture: "selectedImage", tags: "prediction" },
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -175,7 +184,7 @@ function App() {
                 clipRule="evenodd"
               />
             </svg>
-          </div>
+          </Link>
         </div>
       )}
       <label htmlFor="file" className="btn btn-primary btn-wide mt-10">
