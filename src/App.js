@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
 import CreatePostPage from "./Components/CreatePostPage";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import axios from "axios";
 
 function App() {
   const labels = ["Blight", "Common Rust", "Gray Leaf Spot", "Healthy"];
@@ -79,6 +80,21 @@ function App() {
       console.log("No image selected.");
     }
   };
+
+  const handleImageMultiple = async (event) => {
+    const imageFile = event.target.files[0];
+    if(imageFile){
+      const formData = new FormData();
+      formData.append('file', imageFile);
+      try{
+        const response = await axios.post("https://railway-django-cornleaf-production.up.railway.app/stats/multi-detect/", formData)
+        console.log(response.data)
+      }
+      catch(error){
+        console.error(error)
+      }
+    }
+  }
 
   if (!modelLoaded) {
     return (
@@ -213,7 +229,7 @@ function App() {
         onChange={handleImageUpload}
         className="mb-4 hidden"
       />
-      <label htmlFor="file" className="btn btn-primary btn-wide mt-3">
+      <label htmlFor="fileMultiple" className="btn btn-primary btn-wide mt-3">
         Multi-leaves
         <span>
           <svg
@@ -234,10 +250,10 @@ function App() {
       </label>
       {/* Change onchange function to latest api */}
       <input
-        id="file"
+        id="fileMultiple"
         type="file"
         accept="image/*"
-        onChange={handleImageUpload}
+        onChange={handleImageMultiple}
         className="mb-4 hidden"
       />
     </div>
