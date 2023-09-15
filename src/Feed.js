@@ -12,7 +12,7 @@ function Feed() {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const API_BASE_URL = 'https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev'
+  const API_BASE_URL = 'https://railway-django-cornleaf-production.up.railway.app'
   
 
   useEffect(() => {

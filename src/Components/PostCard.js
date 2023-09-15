@@ -19,7 +19,7 @@ export default function PostCard({
     try {
       const getCommentForAPost = async () => {
         const response = await axios.get(
-          `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/comment/api3/comment/?post=${postID}`,
+          `https://railway-django-cornleaf-production.up.railway.app/comment/api3/comment/?post=${postID}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -46,7 +46,7 @@ export default function PostCard({
 
     try {
       await axios.post(
-        "https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev/comment/api3/comment/",
+        "https://railway-django-cornleaf-production.up.railway.app/comment/api3/comment/",
         formData,
         {
           headers: {
