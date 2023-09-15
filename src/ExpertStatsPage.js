@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FeedNavbar from "./Components/FeedNavbar";
 import FeedSideBar from "./Components/FeedSideBar";
 import DatePicker from "react-datepicker";
@@ -46,6 +46,32 @@ function ExpertStatsPage() {
     const options = { year: "numeric", month: "short", day: "2-digit" };
     return new Date(date).toLocaleDateString(undefined, options);
   };
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const API_BASE_URL = 'https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev'
+
+  useEffect(() => {
+    document.title = "Feed-Cornleaf Disease Classifier";
+    
+    const fetchPosts = async () => {
+
+      try {
+        const postsResponse  = await axios.get(`${API_BASE_URL}/post/api2/posts/`); 
+        const postsResponseResults = await postsResponse.data['results'].slice(0,2);
+        console.log(postsResponseResults)
+        
+        setPosts(postsResponseResults); // Update the state with the fetched posts
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
     <div className="min-h-screen bg-base-100">
       <FeedNavbar />
@@ -133,7 +159,8 @@ function ExpertStatsPage() {
               </thead>
               <tbody>
                 {/* row 1 */}
-                <tr>
+                {posts.map((post) => (
+                  <tr key={post.id}>
                   <th>
                     <label>
                       <input type="checkbox" className="checkbox" />
@@ -144,61 +171,30 @@ function ExpertStatsPage() {
                       <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                           <img
-                            src="https://images.livemint.com/img/2021/03/07/1600x900/LSpic_1615133040221_1615133049722.jpg"
-                            alt="User avatar"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">Lowel Kardim</div>
-                        <div className="text-sm opacity-50">Aug 1, 2023</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-
-                    <span className="badge badge-ghost badge-sm">
-                      Farmer
-                    </span>
-                  </td>
-                  <td>Blight, Healthy</td>
-                  <th>
-                    <button className="btn btn-ghost btn-xs">Comment</button>
-                  </th>
-                </tr>
-                {/* row 2 */}
-                <tr>
-                  <th>
-                    <label>
-                      <input type="checkbox" className="checkbox" />
-                    </label>
-                  </th>
-                  <td>
-                    <div className="flex items-center space-x-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src="https://otbsalessolutions.com/wp-content/uploads/2021/08/Farmer-standing-in-field.jpg"
+                            src={post.author_image}
                             alt="User Avatar"
                           />
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">Adam Rosemary</div>
-                        <div className="text-sm opacity-50">July 31, 2023</div>
+                        <div className="font-bold">{post.author_name}</div>
+                        <div className="text-sm opacity-50">{post.date_posted}</div>
                       </div>
                     </div>
                   </td>
                   <td>
                     <span className="badge badge-ghost badge-sm">
-                      Farmer
+                      {post.author_type}
                     </span>
                   </td>
-                  <td>Other</td>
+                  <td>{post.tags}</td>
                   <th>
                     <button className="btn btn-ghost btn-xs">Comment</button>
                   </th>
                 </tr>
+                ))}
+
+                
               </tbody>
               {/* foot */}
               <tfoot>

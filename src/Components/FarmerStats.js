@@ -28,7 +28,7 @@ function FarmerStats() {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const axiosInstance = axios.create({
-    baseURL: 'https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/', // Replace with your API base URL
+    baseURL: 'https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev/', // Replace with your API base URL
     timeout: 5000, // Set a reasonable timeout value (in milliseconds)
   });
 
@@ -41,7 +41,7 @@ function FarmerStats() {
         const user = JSON.parse(localStorage.getItem("user"));
 
         const response = await axiosInstance.get(
-          `stats/total-stats/${user.id}/`
+          `stats/farmer-total-stats/${user.id}/`
         ); // Replace with your API endpoint
 
         const data = await response.data;
@@ -60,7 +60,7 @@ function FarmerStats() {
 
         const formattedDate = `${year}-${month}-${day}`;
         const dailyResponse = await axiosInstance.get(
-          `stats/daily-stats/${user.id}/${formattedDate}/`
+          `stats/farmer-daily-stats/${user.id}/${formattedDate}/`
         );
         const dailyData = await dailyResponse.data;
         setDailyHealthy(dailyData['healthy_count'])

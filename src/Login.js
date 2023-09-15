@@ -22,13 +22,13 @@ function Login() {
       };
 
       const response = await axios.post(
-        "https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/auth/jwt/create/",
+        "https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev/auth/jwt/create/",
         payload
       );
       const user_token = response.data["access"]
       const user_id = jwt(user_token)['user_id']
       const user_response = await axios.get(
-        `https://wj2e17sxka.execute-api.ap-southeast-1.amazonaws.com/dev/auth/users/${user_id}`,
+        `https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev/auth/users/${user_id}`,
         {
           headers: {
             "Authorization": `Bearer ${user_token}`
