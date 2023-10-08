@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
-import CreatePostPage from "./Components/CreatePostPage";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
-
+import ImageCarousel from "./Components/ImageCarousel";
+import Summary from "./Components/Summary";
 function App() {
   const labels = ["Blight", "Common Rust", "Gray Leaf Spot", "Healthy"];
   const [modelLoaded, setModelLoaded] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [prediction, setPrediction] = useState(null);
+  const [lstPrediction, setLstPrediction] = useState([]);
+  const [combinedArray, setCombinedArray] = useState();
+  const [imgUrls, setImgUrls] = useState([]);
   const [model, setModel] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [modelName, setModelName] = useState("Inception");
-
   useEffect(() => {
     async function loadModel() {
       try {
@@ -28,7 +30,13 @@ function App() {
     }
     loadModel();
   }, []);
-
+  useEffect(() => {
+    const combined = imgUrls.map((url, index) => ({
+      Url: url,
+      Label: lstPrediction[index],
+    }));
+    setCombinedArray(combined);
+  }, [imgUrls, lstPrediction]);
   const changeModel = () => {
     const selectbox = document.getElementById("select_model");
     const selectedValue = selectbox.options[selectbox.selectedIndex].value;
@@ -82,19 +90,52 @@ function App() {
   };
 
   const handleImageMultiple = async (event) => {
+    setLstPrediction([]);
+    setImgUrls([]);
     const imageFile = event.target.files[0];
-    if(imageFile){
+    if (imageFile) {
       const formData = new FormData();
-      formData.append('file', imageFile);
-      try{
-        const response = await axios.post("https://railway-django-cornleaf-production.up.railway.app/stats/multi-detect/", formData)
-        console.log(response.data)
+      formData.append("file", imageFile);
+      try {
+        window.my_modal_5.showModal();
+        const response = await axios.post(
+          "https://railway-django-cornleaf-production.up.railway.app/stats/multi-detect/",
+          formData
+        );
+        const predictions = [];
+        // Iterate through the image URLs
+        for (const imageUrl of response.data["files"]) {
+          const imageElement = document.createElement("img");
+          imageElement.src = imageUrl;
+          imageElement.crossOrigin = "anonymous";
+
+          //Wait for the image to load
+          await new Promise((resolve) => {
+            imageElement.onload = resolve;
+          });
+          const tfImage = tf.browser.fromPixels(imageElement).toFloat();
+          const resizedImage = tf.image.resizeBilinear(tfImage, [180, 180]);
+          const normalizedImage = resizedImage.div(255.0);
+          const batchedImage = normalizedImage.expandDims(0);
+          const prediction = await model.predict(batchedImage).data();
+          const predictedClassIndex = tf.argMax(prediction).dataSync()[0];
+          const result = labels[predictedClassIndex];
+          predictions.push(result);
+        }
+        predictions[predictions.length - 1] = "Annotated image";
+        console.log(predictions);
+        setLstPrediction(predictions);
+        setImgUrls(response.data["files"]);
+        const closebutton = document.getElementById("closeButton");
+        closebutton.click();
+        window.my_modal_3.showModal();
+      } catch (error) {
+        console.error(error);
       }
-      catch(error){
-        console.error(error)
-      }
+    } else {
+      console.log("No image selected");
     }
-  }
+  };
 
   if (!modelLoaded) {
     return (
@@ -149,6 +190,24 @@ function App() {
             </button>
           </div>
         </form>
+      </dialog>
+      {/* Modal for Multi Leaves */}
+      <dialog id="my_modal_3" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            {/* if there is a button in form, it will close the modal */}
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-semibold text-xl">Results</h3>
+          <div className="mt-10">
+            <div className="text-center text-lg font-semibold">Summary</div>
+            <Summary combinedArray={combinedArray}/>
+            <ImageCarousel items={combinedArray} />
+            <button className="btn w-full mx-auto my-5 btn-primary">Share</button>
+          </div>
+        </div>
       </dialog>
       <h1 className="text-3xl font-semibold">Classify Disease</h1>
       <div className="flex flex-col lg:flex-row gap-3 mt-5 items-center">
