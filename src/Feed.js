@@ -6,24 +6,26 @@ import FarmerStats from "./Components/FarmerStats";
 import CreatePost from "./Components/CreatePost";
 import axios from "axios";
 
-
 function Feed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const user = JSON.parse(localStorage.getItem("user"));
-  const API_BASE_URL = 'https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev'
+
+  const API_BASE_URL = 'https://railway-django-cornleaf-production.up.railway.app'
   
+
   useEffect(() => {
     document.title = "Feed-Cornleaf Disease Classifier";
 
     const fetchPosts = async () => {
-
       try {
-        const postsResponse  = await axios.get(`${API_BASE_URL}/post/api2/posts/`); 
-        const postsResponseResults = await postsResponse.data['results'];
-        console.log(postsResponseResults)
-        
+        const postsResponse = await axios.get(
+          `${API_BASE_URL}/post/api2/posts/`
+        );
+        const postsResponseResults = await postsResponse.data["results"];
+        console.log(postsResponseResults);
+
         setPosts(postsResponseResults); // Update the state with the fetched posts
         setLoading(false);
       } catch (error) {
@@ -45,7 +47,7 @@ function Feed() {
           {/* Feed div */}
           <div className="w-full lg:w-1/2">
             {/* Write a post */}
-            <CreatePost user={user}/>
+            <CreatePost user={user} />
 
             {/* Start posts */}
             <div className="pt-5 flex flex-col gap-3">
@@ -65,7 +67,7 @@ function Feed() {
                       content={post.content}
                       imageLink={post.image}
                       tags={post.tags}
-                      user = {user}
+                      user={user}
                       comments={post.comments}
                     />
                   </div>

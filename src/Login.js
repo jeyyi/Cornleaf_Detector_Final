@@ -22,13 +22,13 @@ function Login() {
       };
 
       const response = await axios.post(
-        "https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev/auth/jwt/create/",
+        "https://railway-django-cornleaf-production.up.railway.app/auth/jwt/create/",
         payload
       );
       const user_token = response.data["access"]
       const user_id = jwt(user_token)['user_id']
       const user_response = await axios.get(
-        `https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev/auth/users/${user_id}`,
+        `https://railway-django-cornleaf-production.up.railway.app/auth/users/${user_id}`,
         {
           headers: {
             "Authorization": `Bearer ${user_token}`

@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import FeedNavbar from "./FeedNavbar";
 import axios from "axios";
 import FeedSideBar from "./FeedSideBar";
 
 export default function CreatePostPage(props) {
   // const [author, setAuthor] = useState('');
+  const location = useLocation();
   const [content, setContent] = useState("");
   const [pictures, setPictures] = useState("");
   const [blight, setBlight] = useState(false);
@@ -24,6 +26,7 @@ export default function CreatePostPage(props) {
     }
   };
   useEffect(() => {
+    console.log(location);
     document.title = "Create Post";
   }, []);
   const handleDeletePhoto = (event) => {
@@ -45,7 +48,7 @@ export default function CreatePostPage(props) {
       formData.append("other", other);
 
       const response = await axios.post(
-        "https://sngrvepvgc.execute-api.ap-southeast-1.amazonaws.com/dev/post/api2/posts/",
+        "https://railway-django-cornleaf-production.up.railway.app/post/api2/posts/",
         formData,
         {
           headers: {
@@ -55,6 +58,7 @@ export default function CreatePostPage(props) {
       );
 
       if (response.status === 201) {
+        console.log("here")
         if (typeof window !== "undefined") {
           /* Redirect */
           window.my_modal_1.showModal();
@@ -63,6 +67,7 @@ export default function CreatePostPage(props) {
           }, 2000);
         }
       } else {
+        
         alert("Wrong payload");
       }
     } catch (error) {

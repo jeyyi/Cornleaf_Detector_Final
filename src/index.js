@@ -13,12 +13,9 @@ import FarmerStats from "./FarmerStatsPage";
 import Summary from "./Summary";
 import Ailments from "./Ailments";
 import ExpertStatsPage from "./ExpertStatsPage";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import TestGetImage from "./TestGetImage";
+import Cures from "./Cures";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import CreatePostPage from "./Components/CreatePostPage";
 
 const isUserAuthenticated = () => {
@@ -32,100 +29,103 @@ const PrivateWrapper = ({ children }) => {
   return isUserAuthenticated() ? children : <Navigate to="/login" />;
 };
 
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   // <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        {/* Public routes */}
+  <BrowserRouter>
+    <Routes>
+      {/* Public routes */}
 
-        <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login />} />
 
-        {/* Protected routes */}
+      {/* Protected routes */}
+      <Route
+        path="/"
+        element={
+          <PrivateWrapper>
+            <Navigation />
+          </PrivateWrapper>
+        }
+      >
+        <Route index element={<Home />} />
         <Route
-          path="/"
+          path="/classify"
           element={
             <PrivateWrapper>
-              <Navigation />
+              <App />
             </PrivateWrapper>
           }
-        >
-          <Route index element={<Home />} />
-          <Route
-            path="/classify"
-            element={
-              <PrivateWrapper>
-                <App />
-              </PrivateWrapper>
-            }
-          />
-          <Route
-            path="/summary"
-            element={
-              <PrivateWrapper>
-                <Summary />
-              </PrivateWrapper>
-            }
-          />
-          <Route
-            path="/ailments"
-            element={
-              <PrivateWrapper>
-                <Ailments />
-              </PrivateWrapper>
-            }
-          />
-          <Route path="/about" element={<About />} />
-        </Route>
+        />
+        <Route path="/cures" element={<Cures />} />
         <Route
-          path="/create/post"
+          path="/summary"
           element={
             <PrivateWrapper>
-              <CreatePostPage />
+              <Summary />
             </PrivateWrapper>
           }
         />
         <Route
-          path="/feed"
+          path="/ailments"
           element={
             <PrivateWrapper>
-              <Feed />
+              <Ailments />
             </PrivateWrapper>
           }
         />
-        <Route
-          path="/profilefeed"
-          element={
-            <PrivateWrapper>
-              <ProfileFeed />
-            </PrivateWrapper>
-          }
-        />
+        <Route path="/about" element={<About />} />
+      </Route>
+      <Route
+        path="/create/post"
+        element={
+          <PrivateWrapper>
+            <CreatePostPage />
+          </PrivateWrapper>
+        }
+      />
+      <Route
+        path="/feed"
+        element={
+          <PrivateWrapper>
+            <Feed />
+          </PrivateWrapper>
+        }
+      />
+      <Route
+        path="/profilefeed"
+        element={
+          <PrivateWrapper>
+            <ProfileFeed />
+          </PrivateWrapper>
+        }
+      />
 
-        <Route
-          path="/farmerstats"
-          element={
-            <PrivateWrapper>
-              <FarmerStats />
-            </PrivateWrapper>
-          }
-        />
-         <Route
-          path="/expertstats"
-          element={
-            <PrivateWrapper>
-              <ExpertStatsPage />
-            </PrivateWrapper>
-          }
-        />
-        {/* Add other protected routes here */}
-        {/* </Route> */}
+      <Route
+        path="/farmerstats"
+        element={
+          <PrivateWrapper>
+            <FarmerStats />
+          </PrivateWrapper>
+        }
+      />
+      <Route
+        path="/expertstats"
+        element={
+          <PrivateWrapper>
+            <ExpertStatsPage />
+          </PrivateWrapper>
+        }
+      />
 
-        {/* Not Found route */}
-        <Route path="/*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+      {/* Add other protected routes here */}
+      {/* </Route> */}
+
+      {/* Not Found route */}
+      <Route path="/test" element={<TestGetImage />} />
+
+      <Route path="/*" element={<NotFound />} />
+    </Routes>
+  </BrowserRouter>
   // </React.StrictMode>
 );
