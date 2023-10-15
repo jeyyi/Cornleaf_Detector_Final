@@ -70,6 +70,9 @@ function Navigation() {
                   <a href="/classify">Disease Classification</a>
                 </li>
                 <li>
+                  <a href="/cures">Cures</a>
+                </li>
+                <li>
                   <a href="/about">About us</a>
                 </li>
 
@@ -115,6 +118,9 @@ function Navigation() {
           </li>
           <li>
             <a href="/classify">Disease Classification</a>
+          </li>
+          <li>
+            <a href="/cures">Cures</a>
           </li>
           <li>
             <a href="/about">About us</a>
