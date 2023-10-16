@@ -75,6 +75,7 @@ function Feed() {
               )}
             </div>
           </div>
+          {/* here for farmer and expert stats */}
           {user.user_type === "user" ? (
             <div className="px-5 hidden lg:flex flex-1 sticky top-28 right-0 h-fit">
               <FarmerStats />
