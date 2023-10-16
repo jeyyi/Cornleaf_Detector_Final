@@ -5,6 +5,7 @@ import PostCard from "./Components/PostCard";
 import FarmerStats from "./Components/FarmerStats";
 import CreatePost from "./Components/CreatePost";
 import axios from "axios";
+import ExpertStats from "./Components/ExpertStats";
 
 function Feed() {
   const [posts, setPosts] = useState([]);
@@ -75,12 +76,15 @@ function Feed() {
               )}
             </div>
           </div>
+          {/* here for farmer and expert stats */}
           {user.user_type === "user" ? (
             <div className="px-5 hidden lg:flex flex-1 sticky top-28 right-0 h-fit">
               <FarmerStats />
             </div>
           ) : (
-            <></>
+            <div className="px-5 hidden lg:flex flex-1 sticky top-28 right-0 h-fit">
+              <ExpertStats />
+            </div>
           )}
         </div>
       </div>

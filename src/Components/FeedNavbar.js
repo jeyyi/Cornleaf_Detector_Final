@@ -5,7 +5,7 @@ function FeedNavbar() {
     localStorage.removeItem("authToken");
     window.location.href = "/login";
   };
-  const user = JSON.parse(localStorage.getItem('user'))
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
     <div className="border-b-2 bg-lime-600 flex flex-row w-full px-5 lg:px-10 py-4 sticky top-0 z-10">
       <div className="justify-between w-full flex flex-row">
@@ -99,10 +99,7 @@ function FeedNavbar() {
           <div className="avatar dropdown dropdown-bottom dropdown-end">
             <div className="w-10 h-10 rounded-full">
               <label tabIndex={0} className="cursor-pointer">
-                <img
-                  src={user.picture}
-                  alt="Farmer profile"
-                />
+                <img src={user.picture} alt="Farmer profile" />
               </label>
             </div>
             {/* Dropdown for avatar */}
@@ -142,17 +139,32 @@ function FeedNavbar() {
                 </a>
               </li>
               <li className="block lg:hidden">
-                <a href="/farmerstats">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-6 h-6 text-lime-700"
-                  >
-                    <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z" />
-                  </svg>
-                  Stats
-                </a>
+                {/* Handle farmer and expert for anchor tag */}
+                {user.user_type === "user" ? (
+                  <a href="/farmerstats">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-6 h-6 text-lime-700"
+                    >
+                      <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z" />
+                    </svg>
+                    Stats
+                  </a>
+                ) : (
+                  <a href="/expertstats">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-6 h-6 text-lime-700"
+                    >
+                      <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z" />
+                    </svg>
+                    Stats
+                  </a>
+                )}
               </li>
               <li>
                 <a href="/" onClick={handleLogout}>

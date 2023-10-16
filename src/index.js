@@ -17,6 +17,9 @@ import TestGetImage from "./TestGetImage";
 import Cures from "./Cures";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import CreatePostPage from "./Components/CreatePostPage";
+import Cures_Blight from "./Cures_Blight";
+import Cures_Rust from "./Cures_Rust";
+import Cures_GLS from "./Cures_GLS";
 
 const isUserAuthenticated = () => {
   // Replace this with your actual authentication check, e.g., check for a valid token in local storage
@@ -58,6 +61,9 @@ root.render(
           }
         />
         <Route path="/cures" element={<Cures />} />
+        <Route path="/cures/blight" element={<Cures_Blight />} />
+        <Route path = "/cures/rust" element ={<Cures_Rust/>}/>
+        <Route path ="/cures/gls" element={<Cures_GLS/>}/>
         <Route
           path="/summary"
           element={
