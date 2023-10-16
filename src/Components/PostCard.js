@@ -144,7 +144,7 @@ export default function PostCard({
                     {comment.author_name}
                   </h3>
                   <div className="badge badge-primary ml-2 text-sm font-light">
-                    {comment.author_type}
+                    {comment.author_type === 'user' ? 'Farmer': 'Expert'}
                   </div>
                 </div>
 

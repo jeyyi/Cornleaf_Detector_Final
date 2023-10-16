@@ -105,7 +105,7 @@ function ProfileFeed() {
                       postID={post.id}
                       author={post.author_name}
                       authorType={
-                        post.author_type
+                        post.author_type === "farmer" ? "Farmer" : "Expert"
                       }
                       authorImage={post.author_image}
                       datePosted={post.date_posted}

@@ -29,11 +29,11 @@ function ExpertStats() {
 
   const axiosInstance = axios.create({
     baseURL: 'https://railway-django-cornleaf-production.up.railway.app/', // Replace with your API base URL
-    timeout: 5000, // Set a reasonable timeout value (in milliseconds)
+    timeout: 10000, // Set a reasonable timeout value (in milliseconds)
   });
 
   useEffect(() => {
-    console.log('farmerstats is called')
+    console.log('ExpertStats is called')
 
     const fetchStats = async () => {
 
@@ -41,7 +41,7 @@ function ExpertStats() {
         const user = JSON.parse(localStorage.getItem("user"));
 
         const response = await axiosInstance.get(
-          `stats/total-stats/${user.id}/`
+          `stats/total-stats/`
         ); // Replace with your API endpoint
 
         const data = await response.data;
@@ -60,16 +60,16 @@ function ExpertStats() {
 
         const formattedDate = `${year}-${month}-${day}`;
         const dailyResponse = await axiosInstance.get(
-          `stats/daily-stats/${user.id}/${formattedDate}/`
+          `stats/daily-stats/${formattedDate}/`
         );
-        const dailyData = await dailyResponse.data;
+        const dailyData = dailyResponse.data;
         setDailyHealthy(dailyData['healthy_count'])
         setDailyBlight(dailyData['blight_count'])
         setDailyRust(dailyData['rust_count'])
         setDailyGraySpot(dailyData['gray_leaf_spot_count'])
         setDailyOther(dailyData['other_count'])
       } catch (error) {
-        console.error("Error fetching stats:", error.response.data);
+        console.error("Error fetching stats:", error);
       }
     };
     fetchStats();
