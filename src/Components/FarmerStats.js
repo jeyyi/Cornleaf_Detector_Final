@@ -29,7 +29,7 @@ function FarmerStats() {
 
   const axiosInstance = axios.create({
     baseURL: 'https://railway-django-cornleaf-production.up.railway.app/', // Replace with your API base URL
-    timeout: 10000, // Set a reasonable timeout value (in milliseconds)
+    timeout: 20000, // Set a reasonable timeout value (in milliseconds)
   });
 
   useEffect(() => {
