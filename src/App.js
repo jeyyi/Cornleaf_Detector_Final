@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
-import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 import axios from "axios";
 import ImageCarousel from "./Components/ImageCarousel";
 import Summary from "./Components/Summary";
@@ -76,7 +76,7 @@ function App() {
           const predictedClassIndex = tf.argMax(prediction).dataSync()[0];
           const result = labels[predictedClassIndex];
           setPrediction(result);
-
+          /* create post api call  */
           const closebutton = document.getElementById("closeButton");
           closebutton.click();
         };
@@ -203,9 +203,11 @@ function App() {
           <h3 className="font-semibold text-xl">Results</h3>
           <div className="mt-10">
             <div className="text-center text-lg font-semibold">Summary</div>
-            <Summary combinedArray={combinedArray}/>
+            <Summary combinedArray={combinedArray} />
             <ImageCarousel items={combinedArray} />
-            <button className="btn w-full mx-auto my-5 btn-primary">Share</button>
+            <button className="btn w-full mx-auto my-5 btn-primary">
+              Share
+            </button>
           </div>
         </div>
       </dialog>
@@ -238,28 +240,28 @@ function App() {
             Prediction:
             <span className="font-bold text-2xl">{" " + prediction}</span>
           </p>
-          {/* Share button */}
-          <Link
-            className="tooltip ml-2 cursor-pointer"
-            data-tip="Share"
-            to={{
-              pathname: "../create/post",
-              state: { picture: "selectedImage", tags: "prediction" },
-            }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="w-8 h-8"
+          {/* Share button */} 
+            <Link
+              className="tooltip ml-2 cursor-pointer"
+              data-tip="Share"
+              to={{
+                pathname: "../create/post",
+                state: { picture: "selectedImage", tags: "example tag" },
+              }}
             >
-              <path
-                fillRule="evenodd"
-                d="M15.75 4.5a3 3 0 11.825 2.066l-8.421 4.679a3.002 3.002 0 010 1.51l8.421 4.679a3 3 0 11-.729 1.31l-8.421-4.678a3 3 0 110-4.132l8.421-4.679a3 3 0 01-.096-.755z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </Link>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                className="w-8 h-8"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M15.75 4.5a3 3 0 11.825 2.066l-8.421 4.679a3.002 3.002 0 010 1.51l8.421 4.679a3 3 0 11-.729 1.31l-8.421-4.678a3 3 0 110-4.132l8.421-4.679a3 3 0 01-.096-.755z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </Link>
         </div>
       )}
       <label htmlFor="file" className="btn btn-primary btn-wide mt-10">
