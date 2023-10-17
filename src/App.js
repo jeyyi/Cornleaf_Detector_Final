@@ -143,6 +143,19 @@ function App() {
           const prediction = await model.predict(batchedImage).data();
           const predictedClassIndex = tf.argMax(prediction).dataSync()[0];
           const result = labels[predictedClassIndex];
+          if (result === "Blight") {
+            setBlight(true);
+          }
+          if (result === "Gray Leaf Spot") {
+            setGrayLeafSpot(true);
+            console.log(grayLeafSpot);
+          }
+          if (result === "Common Rust") {
+            setRust(true);
+          }
+          if (result === "Healthy") {
+            setHealthy(true);
+          }
           predictions.push(result);
         }
         predictions[predictions.length - 1] = "Annotated image";
@@ -186,6 +199,10 @@ function App() {
         console.log(formData);
         if (response.status === 201) {
           console.log("here");
+          setBlight(false);
+          setHealthy(false);
+          setRust(false);
+          setGrayLeafSpot(false);
           if (typeof window !== "undefined") {
             /* Redirect */
             window.my_modal_1.showModal();

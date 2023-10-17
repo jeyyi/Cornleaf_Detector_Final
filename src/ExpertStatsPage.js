@@ -189,7 +189,7 @@ function ExpertStatsPage() {
                   </td>
                   <td>{post.tags}</td>
                   <th>
-                    <button className="btn btn-ghost btn-xs">Comment</button>
+                    <a href="/feed" className="btn btn-ghost btn-xs">Comment</a>
                   </th>
                 </tr>
                 ))}
