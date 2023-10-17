@@ -86,13 +86,13 @@ function FarmerStats() {
     { name: "Blight", value: dailyBlight },
     { name: "Rust", value: dailyRust },
     { name: "Gray Spot", value: dailyGraySpot},
-    { name: "Other", value: dailyOther},
+   
   ];
   const chartdata = {
-    labels: ["Blight", "Gray Leaf Spot", "Rust","Healthy", "Other"],
+    labels: ["Blight", "Gray Leaf Spot", "Rust","Healthy"],
     datasets: [
       {
-        data: [blight, graySpot, rust, healthy, other],
+        data: [blight, graySpot, rust, healthy],
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56","#55eb34", "#7F00FF"],
         hoverBackgroundColor: ["#fa4b71", "#2799e6", "#fcbd1c","#2ba611", "#7F00FF"],
       },

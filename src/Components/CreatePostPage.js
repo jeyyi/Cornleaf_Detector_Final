@@ -49,6 +49,7 @@ export default function CreatePostPage() {
       formData.append("gray_leaf_spot", grayLeafSpot);
       formData.append("healthy", healthy);
       formData.append("other", other);
+      
 
       const response = await axios.post(
         "https://railway-django-cornleaf-production.up.railway.app/post/api2/posts/",

@@ -15,6 +15,14 @@ function App() {
   const [model, setModel] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [modelName, setModelName] = useState("Inception");
+  const [content, setContent] = useState("");
+  const [pictures, setPictures] = useState("");
+  const [blight, setBlight] = useState(false);
+  const [rust, setRust] = useState(false);
+  const [grayLeafSpot, setGrayLeafSpot] = useState(false);
+  const [healthy, setHealthy] = useState(false);
+  const [other, setOther] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     async function loadModel() {
       try {
@@ -75,6 +83,21 @@ function App() {
           const prediction = await model.predict(batchedImage).data();
           const predictedClassIndex = tf.argMax(prediction).dataSync()[0];
           const result = labels[predictedClassIndex];
+          //switch for blight, gray leaf spot, etc
+          console.log(result);
+          if (result === "Blight") {
+            setBlight(true);
+          }
+          if (result === "Gray Leaf Spot") {
+            setGrayLeafSpot(true);
+            console.log(grayLeafSpot);
+          }
+          if (result === "Common Rust") {
+            setRust(true);
+          }
+          if (result === "Healthy") {
+            setHealthy(true);
+          }
           setPrediction(result);
           /* create post api call  */
           const closebutton = document.getElementById("closeButton");
@@ -136,6 +159,49 @@ function App() {
       console.log("No image selected");
     }
   };
+
+  useEffect(() => {
+    async function passForm() {
+      try {
+        const formData = new FormData();
+        formData.append("content", content);
+        formData.append("image", pictures);
+        formData.append("author", user.id);
+        formData.append("blight", blight);
+        formData.append("rust", rust);
+        formData.append("gray_leaf_spot", grayLeafSpot);
+        formData.append("healthy", healthy);
+        formData.append("other", other);
+        formData.append("is_classification", true);
+        console.log(formData)
+        const response = await axios.post(
+          "https://railway-django-cornleaf-production.up.railway.app/post/api2/posts/",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log(formData);
+        if (response.status === 201) {
+          console.log("here");
+          if (typeof window !== "undefined") {
+            /* Redirect */
+            window.my_modal_1.showModal();
+            setTimeout(() => {
+              window.location.href = "/feed";
+            }, 2000);
+          }
+        } else {
+          alert("Wrong payload");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    passForm();
+  }, [blight, grayLeafSpot, rust, healthy]);
 
   if (!modelLoaded) {
     return (
@@ -240,30 +306,28 @@ function App() {
             Prediction:
             <span className="font-bold text-2xl">{" " + prediction}</span>
           </p>
-          {/* Share button */} 
-            <Link
-              className="tooltip ml-2 cursor-pointer"
-              data-tip="Share"
-              to={{
-                pathname: "../create/post",
-                state: { picture: "selectedImage", tags: "example tag" },
-              }}
+          {/* Share button */}
+          <Link
+            className="tooltip ml-2 cursor-pointer"
+            data-tip="Share"
+            to={{
+              pathname: "../create/post",
+              state: { picture: "selectedImage", tags: "example tag" },
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="w-8 h-8"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="w-8 h-8"
-
-            
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M15.75 4.5a3 3 0 11.825 2.066l-8.421 4.679a3.002 3.002 0 010 1.51l8.421 4.679a3 3 0 11-.729 1.31l-8.421-4.678a3 3 0 110-4.132l8.421-4.679a3 3 0 01-.096-.755z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </Link>
+              <path
+                fillRule="evenodd"
+                d="M15.75 4.5a3 3 0 11.825 2.066l-8.421 4.679a3.002 3.002 0 010 1.51l8.421 4.679a3 3 0 11-.729 1.31l-8.421-4.678a3 3 0 110-4.132l8.421-4.679a3 3 0 01-.096-.755z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </Link>
         </div>
       )}
       <label htmlFor="file" className="btn btn-primary btn-wide mt-10">
