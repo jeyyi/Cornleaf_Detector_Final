@@ -9,36 +9,86 @@ import "chart.js/auto";
 import axios from "axios";
 
 function ExpertStatsPage() {
+  const [healthy, setHealthy] = useState(0)
+  const [blight, setBlight] = useState(0)
+  const [rust, setRust] = useState(0)
+  const [graySpot, setGraySpot] = useState(0)
+  const [other, setOther] = useState(0)
+  const [dailyHealthy, setDailyHealthy] = useState(0)
+  const [dailyBlight, setDailyBlight] = useState(0)
+  const [dailyRust, setDailyRust] = useState(0)
+  const [dailyGraySpot, setDailyGraySpot] = useState(0)
+  const [dailyOther, setDailyOther] = useState(0)
   const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const axiosInstance = axios.create({
+    baseURL: 'https://railway-django-cornleaf-production.up.railway.app/', // Replace with your API base URL
+    timeout: 15000, // Set a reasonable timeout value (in milliseconds)
+  });
+
+  useEffect(() => {
+    console.log('ExpertStats is called')
+
+    const fetchStats = async () => {
+
+      try {
+        const user = JSON.parse(localStorage.getItem("user"));
+
+        const response = await axiosInstance.get(
+          `stats/total-stats/`
+        ); // Replace with your API endpoint
+
+        const data = await response.data;
+        setHealthy(data['healthy_count'])
+        setBlight(data['blight_count'])
+        setRust(data['rust_count'])
+        setGraySpot(data['gray_leaf_spot_count'])
+        setOther(data['other_count'])
+
+
+        const dateString = selectedDate;
+        const dateObj = new Date(dateString);
+        const year = dateObj.getFullYear();
+        const month = (dateObj.getMonth() + 1).toString().padStart(2, '0');
+        const day = dateObj.getDate().toString().padStart(2, '0');
+
+        const formattedDate = `${year}-${month}-${day}`;
+        const dailyResponse = await axiosInstance.get(
+          `stats/daily-stats/${formattedDate}/`
+        );
+        const dailyData = dailyResponse.data;
+        setDailyHealthy(dailyData['healthy_count'])
+        setDailyBlight(dailyData['blight_count'])
+        setDailyRust(dailyData['rust_count'])
+        setDailyGraySpot(dailyData['gray_leaf_spot_count'])
+        setDailyOther(dailyData['other_count'])
+      } catch (error) {
+        console.error("Error fetching stats:", error);
+      }
+    };
+    fetchStats();
+    
+  }, [selectedDate]);
+
+
+
   const data = [
-    { name: "Healthy", value: 10 },
-    { name: "Blight", value: 23 },
-    { name: "Rust", value: 15 },
-    { name: "Gray Spot", value: 25 },
-    { name: "Other", value: 18 },
+    { name: "Healthy", value: dailyHealthy },
+    { name: "Blight", value: dailyBlight },
+    { name: "Rust", value: dailyRust },
+    { name: "Gray Spot", value: dailyGraySpot},
   ];
   const chartdata = {
-    labels: ["Blight", "Gray Leaf Spot", "Rust", "Healthy", "Other"],
+    labels: ["Blight", "Gray Leaf Spot", "Rust","Healthy"],
     datasets: [
       {
-        data: [230, 451, 182, 623, 498],
-        backgroundColor: [
-          "#FF6384",
-          "#36A2EB",
-          "#FFCE56",
-          "#55eb34",
-          "#7F00FF",
-        ],
-        hoverBackgroundColor: [
-          "#fa4b71",
-          "#2799e6",
-          "#fcbd1c",
-          "#2ba611",
-          "#7F00FF",
-        ],
+        data: [blight, graySpot, rust, healthy],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56","#55eb34", "#7F00FF"],
+        hoverBackgroundColor: ["#fa4b71", "#2799e6", "#fcbd1c","#2ba611", "#7F00FF"],
       },
     ],
   };
+
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
