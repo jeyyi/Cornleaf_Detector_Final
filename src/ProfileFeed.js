@@ -75,7 +75,7 @@ function ProfileFeed() {
               <CreatePost user={user}/>
               <div className="w-full rounded-lg shadow-md mt-2 flex">
                 <h3 className="text-xl font-semibold px-5 py-3 flex-1">
-                  3 latest posts
+                Latest posts
                 </h3>
                 <div className="flex items-center pr-3 text-lg text-lime-700 font-light">
                   <svg

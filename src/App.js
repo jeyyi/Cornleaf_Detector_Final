@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
-import { Link } from "react-router-dom";
+import { Link, Router } from "react-router-dom";
 import axios from "axios";
 import ImageCarousel from "./Components/ImageCarousel";
 import Summary from "./Components/Summary";
@@ -15,6 +15,14 @@ function App() {
   const [model, setModel] = useState(null);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [modelName, setModelName] = useState("Inception");
+  const [content, setContent] = useState("");
+  const [pictures, setPictures] = useState("");
+  const [blight, setBlight] = useState(false);
+  const [rust, setRust] = useState(false);
+  const [grayLeafSpot, setGrayLeafSpot] = useState(false);
+  const [healthy, setHealthy] = useState(false);
+  const [other, setOther] = useState(false);
+  const user = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
     async function loadModel() {
       try {
@@ -75,8 +83,23 @@ function App() {
           const prediction = await model.predict(batchedImage).data();
           const predictedClassIndex = tf.argMax(prediction).dataSync()[0];
           const result = labels[predictedClassIndex];
+          //switch for blight, gray leaf spot, etc
+          console.log(result);
+          if (result === "Blight") {
+            setBlight(true);
+          }
+          if (result === "Gray Leaf Spot") {
+            setGrayLeafSpot(true);
+            console.log(grayLeafSpot);
+          }
+          if (result === "Common Rust") {
+            setRust(true);
+          }
+          if (result === "Healthy") {
+            setHealthy(true);
+          }
           setPrediction(result);
-
+          /* create post api call  */
           const closebutton = document.getElementById("closeButton");
           closebutton.click();
         };
@@ -120,6 +143,19 @@ function App() {
           const prediction = await model.predict(batchedImage).data();
           const predictedClassIndex = tf.argMax(prediction).dataSync()[0];
           const result = labels[predictedClassIndex];
+          if (result === "Blight") {
+            setBlight(true);
+          }
+          if (result === "Gray Leaf Spot") {
+            setGrayLeafSpot(true);
+            console.log(grayLeafSpot);
+          }
+          if (result === "Common Rust") {
+            setRust(true);
+          }
+          if (result === "Healthy") {
+            setHealthy(true);
+          }
           predictions.push(result);
         }
         predictions[predictions.length - 1] = "Annotated image";
@@ -136,6 +172,53 @@ function App() {
       console.log("No image selected");
     }
   };
+
+  useEffect(() => {
+    async function passForm() {
+      try {
+        const formData = new FormData();
+        formData.append("content", content);
+        formData.append("image", pictures);
+        formData.append("author", user.id);
+        formData.append("blight", blight);
+        formData.append("rust", rust);
+        formData.append("gray_leaf_spot", grayLeafSpot);
+        formData.append("healthy", healthy);
+        formData.append("other", other);
+        formData.append("is_classification", true);
+        console.log(formData)
+        const response = await axios.post(
+          "https://railway-django-cornleaf-production.up.railway.app/post/api2/posts/",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        console.log(formData);
+        if (response.status === 201) {
+          console.log("here");
+          setBlight(false);
+          setHealthy(false);
+          setRust(false);
+          setGrayLeafSpot(false);
+          if (typeof window !== "undefined") {
+            /* Redirect */
+            window.my_modal_1.showModal();
+            setTimeout(() => {
+              window.location.href = "/feed";
+            }, 2000);
+          }
+        } else {
+          alert("Wrong payload");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    passForm();
+  }, [blight, grayLeafSpot, rust, healthy]);
 
   if (!modelLoaded) {
     return (
@@ -203,9 +286,11 @@ function App() {
           <h3 className="font-semibold text-xl">Results</h3>
           <div className="mt-10">
             <div className="text-center text-lg font-semibold">Summary</div>
-            <Summary combinedArray={combinedArray}/>
+            <Summary combinedArray={combinedArray} />
             <ImageCarousel items={combinedArray} />
-            <button className="btn w-full mx-auto my-5 btn-primary">Share</button>
+            <button className="btn w-full mx-auto my-5 btn-primary">
+              Share
+            </button>
           </div>
         </div>
       </dialog>
@@ -244,7 +329,7 @@ function App() {
             data-tip="Share"
             to={{
               pathname: "../create/post",
-              state: { picture: "selectedImage", tags: "prediction" },
+              state: { picture: "selectedImage", tags: "example tag" },
             }}
           >
             <svg

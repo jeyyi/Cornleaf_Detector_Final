@@ -4,9 +4,12 @@ import FeedNavbar from "./FeedNavbar";
 import axios from "axios";
 import FeedSideBar from "./FeedSideBar";
 
-export default function CreatePostPage(props) {
+export default function CreatePostPage() {
+  
   // const [author, setAuthor] = useState('');
   const location = useLocation();
+  const tags = location.state?.tags;
+  console.log(tags)
   const [content, setContent] = useState("");
   const [pictures, setPictures] = useState("");
   const [blight, setBlight] = useState(false);
@@ -46,6 +49,7 @@ export default function CreatePostPage(props) {
       formData.append("gray_leaf_spot", grayLeafSpot);
       formData.append("healthy", healthy);
       formData.append("other", other);
+      
 
       const response = await axios.post(
         "https://railway-django-cornleaf-production.up.railway.app/post/api2/posts/",
