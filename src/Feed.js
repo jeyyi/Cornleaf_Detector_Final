@@ -22,7 +22,7 @@ function Feed() {
     const fetchPosts = async () => {
       try {
         const postsResponse = await axios.get(
-          `${API_BASE_URL}/post/api2/posts/`
+          `${API_BASE_URL}/post/api2/posts/?is_classification=false`
         );
         const postsResponseResults = await postsResponse.data["results"];
         console.log(postsResponseResults);
